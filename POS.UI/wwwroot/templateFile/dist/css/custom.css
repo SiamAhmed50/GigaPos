@@ -1,0 +1,10 @@
+.logo-icon img{
+    width: 42px;
+    height: 40px;
+}
+.sidebar-item:hover {
+  background:  rgba(255, 0, 0, 0.2);
+}
+.dropdown-item:hover {
+    background: rgba(255, 0, 0, 0.2);
+}
