@@ -18,8 +18,8 @@ namespace POS.UI.Controllers
 
         public IActionResult Index()
         {
-            var categories = _unitOfWork.Category.GetAll();
-            return View(categories);
+            
+            return View();
         }
 
         public IActionResult Create()
@@ -71,34 +71,30 @@ namespace POS.UI.Controllers
 
             return View(model);
         }
+       
+        #region API Calls
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var categoryList = _unitOfWork.Category.GetAll();
+
+            return Json(new { data = categoryList });
+        }
+
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var category = _unitOfWork.Category.GetFirstOrDefault(f => f.Id == id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-            return View(category);
-        }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(Category model)
-        {
-
-            var category = _unitOfWork.Category.GetFirstOrDefault(f => f.Id == model.Id);
-            if (category == null)
+            var product = _unitOfWork.Category.GetFirstOrDefault(f => f.Id == id);
+            if (product == null)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Error while Deleting" });
             }
-            _unitOfWork.Category.Remove(category);
+            
+            _unitOfWork.Category.Remove(product);
             _unitOfWork.Save();
-            TempData["success"] = "Category Deleted Succesfully!";
-            return RedirectToAction("Index");
+            return Json(new { success = true, message = "Deleted Successfully!" });
         }
+        #endregion
     }
 }
