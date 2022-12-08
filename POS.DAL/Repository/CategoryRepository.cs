@@ -1,6 +1,6 @@
 ﻿using POS.DAL.Data;
 using POS.DAL.Repository.IRpository;
-using POS.Models.ProductModel;
+using POS.Models.EntityModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POS.Models.ProductModel
+namespace POS.Models.EntityModel
 {
-    public class Category
+    public class Category : BaseEntity
     {
-        public int Id { get; set; }
+  
         [Required]
         public string Name { get; set; }
         [Display(Name = "Display Order")]

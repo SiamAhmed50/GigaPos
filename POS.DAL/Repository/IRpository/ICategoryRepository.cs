@@ -1,4 +1,4 @@
-﻿using POS.Models.ProductModel;
+﻿using POS.Models.EntityModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

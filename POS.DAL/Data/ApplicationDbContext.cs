@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using POS.Models.ProductModel;
+using POS.Models.EntityModel;
 
 namespace POS.DAL.Data
 {
