@@ -1,0 +1,69 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+
+            <form class="login100-form validate-form" id="account" method="post">
+                
+                <div class="logo text-center">
+                    <img style="height: 100px;width: 100px;" src="~/img/logo.png" alt="">
+                </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+
+                   
+                    <input asp-for="Input.UserName" class="input100" autocomplete="username" aria-required="true" />
+                    <span class="focus-input100" data-placeholder="User Name"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                    <span class="btn-show-pass">
+                        <i class="zmdi zmdi-eye"></i>
+                    </span>
+                  
+                    <input asp-for="Input.Password" class="input100" autocomplete="current-password" aria-required="true" />
+                    <span class="focus-input100" data-placeholder="Password"></span>
+                </div>
+                <div class="checkbox">
+                    <label asp-for="Input.RememberMe" class="form-label">
+                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <button class="login100-form-btn" id="login-submit" type="submit">
+                            Login
+                        </button>
+                        
+                    </div>
+                </div>
+
+                <div>
+                    <p>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                    </p>
+                    <p>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                    </p>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    
+    <partial name="_ValidationScriptsPartial" />
+}

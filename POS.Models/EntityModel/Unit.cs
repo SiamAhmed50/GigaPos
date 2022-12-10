@@ -15,7 +15,7 @@ namespace POS.Models.EntityModel
 
         public int RelatedUnitId { get; set; }
 
-        public List<string> RelatedSign { get; set; }
+        public string RelatedSign { get; set; }
 
         public int RelatedBy { get; set; }
     }

@@ -1,0 +1,93 @@
+﻿@model BrandVM
+@{
+    ViewData["Title"] = "Upsert";
+}
+<form asp-action="Upsert" method="post" enctype="multipart/form-data">
+
+    <div class="row">
+        <input hidden asp-for="Brand.Id" />
+        <input hidden asp-for="Brand.LogoUrl" />
+        <div class="col-md-4">
+            <div class=" mt-4 p-7">
+                <img id="imageFileUpload" src="@Model.Brand.LogoUrl" style="width:200px;height:300px;border-radius:4px" />
+                <div class="mb-3 mt-2 ">
+
+                    <label asp-for="Brand.LogoUrl"></label>
+                    <input type="file" id="uploadbox" asp-for="Brand.LogoUrl" name="file" class="form-control" />
+                    <span asp-validation-for="Brand.LogoUrl" class="text-danger"></span>
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-8">
+
+
+            <div class="border mt-4 p-3 row">
+                <div class="row pb-2">
+                    <h2 class="text-primary">@(Model.Brand.Id == 0 ? "Create" : "Update") Product</h2>
+                    <hr />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Brand.Name"></label>
+                    <input asp-for="Brand.Name" class="form-control" />
+                    <span asp-validation-for="Brand.Name" class="text-danger"></span>
+                </div>
+              
+               
+           
+               
+
+
+                <div class="col-md-12 ">
+                    @if (Model.Brand.Id != 0)
+                    {
+                        <button type="submit" style="width:150px" class="btn btn-primary">Update</button>
+                    }
+                    else
+                    {
+                        <button type="submit" onclick="return ValidateInput()" style="width:150px" class="btn btn-primary">Create</button>
+                    }
+
+                    <a asp-action="Index" asp-controller="Brands" type="button" style="width:150px" class="btn btn-secondary mx-2">Back to List</a>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+<script>
+
+    //Image Change
+    document.getElementById('uploadbox').onchange = function () {
+
+        document.getElementById('imageFileUpload').src = URL.createObjectURL(uploadbox.files[0]);
+    }
+
+
+    //Image Validation
+    function ValidateInput() {
+        if (document.getElementById('uploadbox').value == "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please Upload an Image'
+
+            });
+            return false;
+        }
+        return true;
+
+    }
+</script>
+
+

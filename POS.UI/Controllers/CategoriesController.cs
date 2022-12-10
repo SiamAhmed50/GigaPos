@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using POS.DAL.Repository.IRpository;
 using POS.Models.EntityModel;
-using POS.UI.Models.ViewModels;
+
 using System.Text;
 
 namespace POS.UI.Controllers
