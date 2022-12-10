@@ -32,7 +32,10 @@ builder.Services.Configure<IdentityOptions>(options =>
     // options.Password.RequiredLength = 2;
     options.Password.RequiredUniqueChars = 0;
 });
-
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Identity/Account/Login";
+});
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
