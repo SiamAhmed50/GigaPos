@@ -6,14 +6,15 @@
 
 <div p-3">
     <div class="row">
-        <div class="col-md-6 offset-md-5">
+        <div class="col-md-12 ">
+           
             <form class="" asp-action="Upsert" method="post">
                 <div class="border mt-4 p-3">
                     <div class="row pb-2">
                         <h2 class="text-primary">Create Unit</h2>
                         <hr />
                     </div>
-
+                    <input hidden asp-for="Unit.Id" />
 
                     <div class="mb-3">
                         <label asp-for="Unit.Name"></label>
@@ -32,7 +33,7 @@
                     </div>
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary" style="width:150px">Submit</button>
-                        <a asp-controller="Categories" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+                        <a asp-controller="Units" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
                     </div>
                 </div>
 

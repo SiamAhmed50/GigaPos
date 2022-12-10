@@ -16,3 +16,16 @@ html {
 body {
   margin-bottom: 60px;
 }
+span.brand-text.font-weight-light {
+    font-size: 18px;
+}
+.nav-sidebar .nav-link p {
+    display: inline;
+    margin: 0;
+    white-space: normal;
+    color: #c2c7d0;
+}
+.nav-sidebar .nav-link:hover p {
+    
+    color: #fff;
+}

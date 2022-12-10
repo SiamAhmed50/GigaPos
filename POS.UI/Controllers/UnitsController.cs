@@ -86,13 +86,13 @@ namespace POS.UI.Controllers
         public IActionResult Delete(int? id)
         {
 
-            var unit = _unitOfWork.Brand.GetFirstOrDefault(f => f.Id == id);
+            var unit = _unitOfWork.Unit.GetFirstOrDefault(f => f.Id == id);
             if (unit == null)
             {
                 return Json(new { success = false, message = "Error while Deleting" });
             }
 
-            _unitOfWork.Brand.Remove(unit);
+            _unitOfWork.Unit.Remove(unit);
             _unitOfWork.Save();
             return Json(new { success = true, message = "Deleted Successfully!" });
         }

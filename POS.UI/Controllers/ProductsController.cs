@@ -30,31 +30,34 @@ namespace POS.UI.Controllers
             
 
             // category item for dropdown
-            List<CategoryVM> categoryVm = new List<CategoryVM>();
+            List<Category> categoryList = new List<Category>();
            
 
            
-            List<UnitVM> unitVM = new List<UnitVM>();
-            List<BrandVM> brandVM = new List<BrandVM>();
-            
+            List<Unit> unitList = new List<Unit>();
+            List<Brand> brandList = new List<Brand>();
+
+            categoryList = _unitOfWork.Category.GetAll().ToList();
+            unitList = _unitOfWork.Unit.GetAll().ToList();
+            brandList = _unitOfWork.Brand.GetAll().ToList(); 
 
             ProductVM productVM = new()
             {
                 Product = new(),
-                CategoryList = categoryVm.Select(i => new SelectListItem
+                CategoryList = categoryList.Select(i => new SelectListItem
                 {
-                    Text = i.Category.Name,
-                    Value = i.Category.Id.ToString()
+                    Text = i.Name,
+                    Value = i.Id.ToString()
                 }),
-                UnitList = unitVM.Select(i => new SelectListItem
+                UnitList = unitList.Select(i => new SelectListItem
                 {
-                    Text = i.Unit.Name,
-                    Value = i.Unit.Id.ToString()
+                    Text = i.Name,
+                    Value = i.Id.ToString()
                 }),
-                BrandList = brandVM.Select(i => new SelectListItem
+                BrandList = brandList.Select(i => new SelectListItem
                 {
-                    Text = i.Brand.Name,
-                    Value = i.Brand.Id.ToString()
+                    Text = i.Name,
+                    Value = i.Id.ToString()
                 }),
             };
 
@@ -151,6 +154,20 @@ namespace POS.UI.Controllers
                 var itemVm = _unitOfWork.Product.GetAll();
                 return Json(new { data = itemVm });
             
+        }
+        [HttpDelete]
+        public IActionResult Delete(int? id)
+        {
+
+            var product = _unitOfWork.Product.GetFirstOrDefault(f => f.Id == id);
+            if (product == null)
+            {
+                return Json(new { success = false, message = "Error while Deleting" });
+            }
+
+            _unitOfWork.Product.Remove(product);
+            _unitOfWork.Save();
+            return Json(new { success = true, message = "Deleted Successfully!" });
         }
         #endregion
     }

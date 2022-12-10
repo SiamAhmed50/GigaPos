@@ -15,6 +15,5 @@ namespace POS.Models.EntityModel
         [Display(Name = "Display Order")]
         [Range(1, 100, ErrorMessage = "Display Oreder Range 1-100")]
         public int DisplayOrder { get; set; }
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
-    }
+     }
 }

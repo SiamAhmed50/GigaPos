@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using POS.DAL.Repository.IRpository;
+using POS.Models.AppVM;
 using POS.Models.EntityModel;
 
 using System.Text;
@@ -30,11 +31,12 @@ namespace POS.UI.Controllers
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public IActionResult Create(Category model)
+        public IActionResult Create(CategoryVM model)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Category.Add(model);
+                Category category = model.Category;
+                _unitOfWork.Category.Add(category);
                 _unitOfWork.Save();
                 TempData["success"] = "Category Created Succesfully!";
                 return RedirectToAction("Index");

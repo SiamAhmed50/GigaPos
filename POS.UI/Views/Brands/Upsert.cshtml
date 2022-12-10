@@ -26,13 +26,18 @@
 
             <div class="border mt-4 p-3 row">
                 <div class="row pb-2">
-                    <h2 class="text-primary">@(Model.Brand.Id == 0 ? "Create" : "Update") Product</h2>
+                    <h2 class="text-primary">@(Model.Brand.Id == 0 ? "Create" : "Update") Brand</h2>
                     <hr />
                 </div>
                 <div class="mb-3">
                     <label asp-for="Brand.Name"></label>
                     <input asp-for="Brand.Name" class="form-control" />
                     <span asp-validation-for="Brand.Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Brand.Description"></label>
+                    <input asp-for="Brand.Description" class="form-control" />
+                    <span asp-validation-for="Brand.Description" class="text-danger"></span>
                 </div>
               
                

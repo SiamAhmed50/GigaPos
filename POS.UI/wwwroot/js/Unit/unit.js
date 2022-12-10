@@ -10,12 +10,14 @@ function loadDataTable() {
         },
         "columns": [
             { "data": "name", "width": "15%" },
+            { "data": "relatedBy", "width": "15%" },
             { "data": "relatedSign", "width": "15%" },
+            
             {
                 "data": "id",
                 "render": function (data, type, full, meta) {
                     return '<div class="w-75 btn-group" role = "group">'
-                        + '<a href="/units/Upsert?Id=' + data + '" class="btn btn-primary mx-2" > <i class="bi bi-pencil-square"></i> Edit</a >' +
+                        + '<a href="/Units/Upsert?Id=' + data + '" class="btn btn-primary mx-2" > <i class="bi bi-pencil-square"></i> Edit</a >' +
                         '<a onClick="Delete(' + data + ')" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a></div > '
                 }
             },
