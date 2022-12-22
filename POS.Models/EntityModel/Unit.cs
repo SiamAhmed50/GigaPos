@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,9 +14,12 @@ namespace POS.Models.EntityModel
         [Required]
         public string Name { get; set; }
 
-        public int RelatedUnitId { get; set; }
+        [Required]
+        [Display(Name = "Related To Unit")]
 
-        public string RelatedSign { get; set; }
+        public int RelatedUnitId { get; set; }
+        public string Operator { get; set; }
+        [Display(Name = "Related By Value")]
 
         public int RelatedBy { get; set; }
     }

@@ -55,3 +55,83 @@ function Delete(id) {
         }
     })
 }
+
+
+$(".unitChange").change(function () {
+
+    debugger
+    let labelExistValue = $('#subUnitValue').text();
+    var text = $(".unitChange option:selected").text();
+    if (labelExistValue=="") {
+        $('.unit-count').show();
+        $('#subUnitValue').text("1" + text);
+    }
+    if (labelExistValue != "") {
+        $('.unit-count').show();
+        $('#subUnitValue').text(labelExistValue + text);
+    }
+   
+     
+   
+    
+   
+});
+
+$('.operatorChange').change(function () {
+
+    debugger
+    let labelExistValue = $('#subUnitValue').text();
+  /*  let existVal = labelValue.val();*/
+    var operatorValue = $(this).val();
+
+    if (labelExistValue == "")
+    {
+        
+        $('.unit-count').show();
+        $('#subUnitValue').text("1Select Unit" + operatorValue);
+    }
+
+    if (labelExistValue != "") {
+        if (operatorValue=="") {
+            $('.unit-count').show();
+            $('#subUnitValue').text("1+"+labelExistValue + operatorValue);
+        }
+        if (operatorValue != "") {
+            $('.unit-count').show();
+            $('#subUnitValue').text("1+" + labelExistValue + operatorValue);
+        }
+       
+    }
+
+
+
+    //if (operatorValue =="") {
+       
+    //    if (labelExistValue=="") {
+    //        $('.unit-count').show();
+
+    //        $('#subUnitValue').text("1Select Unit");
+    //    }
+    //    if (labelExistValue != "") {
+    //        $('.unit-count').show();
+
+    //        $('#subUnitValue').text("1" + labelExistValue);
+    //    }
+    //}
+    //if (operatorValue != "") {
+       
+
+    //    if (labelExistValue == "") {
+    //        $('.unit-count').show();
+    //        $('#subUnitValue').text("1Select Unit" + operatorValue);
+    //    }
+    //    if (labelExistValue != "") {
+    //        $('.unit-count').show();
+
+    //        $('#subUnitValue').text("1" + labelExistValue + operatorValue);
+    //    }
+    //}
+     
+   
+    
+});

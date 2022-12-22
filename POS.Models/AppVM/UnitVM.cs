@@ -1,4 +1,5 @@
-﻿using POS.Models.EntityModel;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using POS.Models.EntityModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace POS.Models.AppVM
     public class UnitVM
     {
         public Unit Unit { get; set; }
+        [ValidateNever]
+        public IEnumerable<SelectListItem> UnitList { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using POS.DAL.Repository.IRpository;
 using POS.Models.AppVM;
 using POS.Models.EntityModel;
@@ -21,13 +22,21 @@ namespace POS.UI.Controllers
 
         public IActionResult Upsert(int? id)
         {
+            List<Unit> unitList = new List<Unit>();
+            unitList = _unitOfWork.Unit.GetAll().ToList();
 
             UnitVM unitVM = new()
             {
-                Unit = new()
+                Unit = new(),
+                UnitList = unitList.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
             };
             if (id == null || id == 0)
             {
+            
                 return View(unitVM);
             }
             else
