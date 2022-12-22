@@ -18,19 +18,26 @@ namespace POS.Models.EntityModel
         public string Code { get; set; }
 
         [Required]
+        [Display(Name ="Category")]
         public int CategoryId { get; set; }
+        [Display(Name = "Brand")]
         public int BrandId { get; set; }
+        [Display(Name = "Unit")]
         public int UnitId { get; set; }
+        [Display(Name = "Sub Unit")]
         public int SubUnit { get; set; }
+        [Display(Name = "Openning Stock")]
         public string OpenningStock { get; set; }
 
 
         [Required]
         [Range(1, 10000)]
+        [Display(Name = "Sale Price")]
         public double SalePrice { get; set; }
 
         [Required]
         [Range(1, 10000)]
+        [Display(Name = "Purchase Cost")]
         public double PurchaseCost { get; set; }
 
         [ValidateNever]
