@@ -56,82 +56,50 @@ function Delete(id) {
     })
 }
 
-
 $(".unitChange").change(function () {
-
     debugger
-    let labelExistValue = $('#subUnitValue').text();
+    let Unitvalue = $(this).text();
     var text = $(".unitChange option:selected").text();
-    if (labelExistValue=="") {
-        $('.unit-count').show();
-        $('#subUnitValue').text("1" + text);
-    }
-    if (labelExistValue != "") {
-        $('.unit-count').show();
-        $('#subUnitValue').text(labelExistValue + text);
-    }
-   
-     
-   
-    
-   
+    $('.unit-count').show();
+    $('#unitValue').text(text);
+
+
+
+
 });
 
-$('.operatorChange').change(function () {
-
+$('.opratorChange').change(function () {
     debugger
-    let labelExistValue = $('#subUnitValue').text();
-  /*  let existVal = labelValue.val();*/
-    var operatorValue = $(this).val();
-
-    if (labelExistValue == "")
-    {
-        
-        $('.unit-count').show();
-        $('#subUnitValue').text("1Select Unit" + operatorValue);
-    }
-
-    if (labelExistValue != "") {
-        if (operatorValue=="") {
+    let existOperatorValue = $('#operatorValue').text();
+    let existUnitValue = $('#unitValue').text();
+    if (existUnitValue == "") {
+        let opratorVal = $(this).val();
+        if (opratorVal == "") {
             $('.unit-count').show();
-            $('#subUnitValue').text("1+"+labelExistValue + operatorValue);
+            $('#operatorValue').text("1select Unit");
+
         }
-        if (operatorValue != "") {
+        if (opratorVal = "*") {
             $('.unit-count').show();
-            $('#subUnitValue').text("1+" + labelExistValue + operatorValue);
+            $('#operatorValue').text("1select Unit*")
         }
-       
+
     }
+    if (existUnitValue != "") {
 
-
-
-    //if (operatorValue =="") {
-       
-    //    if (labelExistValue=="") {
-    //        $('.unit-count').show();
-
-    //        $('#subUnitValue').text("1Select Unit");
-    //    }
-    //    if (labelExistValue != "") {
-    //        $('.unit-count').show();
-
-    //        $('#subUnitValue').text("1" + labelExistValue);
-    //    }
-    //}
-    //if (operatorValue != "") {
-       
-
-    //    if (labelExistValue == "") {
-    //        $('.unit-count').show();
-    //        $('#subUnitValue').text("1Select Unit" + operatorValue);
-    //    }
-    //    if (labelExistValue != "") {
-    //        $('.unit-count').show();
-
-    //        $('#subUnitValue').text("1" + labelExistValue + operatorValue);
-    //    }
-    //}
-     
-   
-    
+        let opratorVal = $(this).val();
+        if (opratorVal == "") {
+            $('.unit-count').show();
+            $('#operatorValue').text("")
+        }
+        if (opratorVal == "*") {
+            $('#existUnitValue').text("")
+            $('.unit-count').show();
+            $('#operatorValue').text("*")
+        }
+    }
 });
+
+$('.relatedValue').keyup(function () {
+    alert('sdhfshdf');
+})
