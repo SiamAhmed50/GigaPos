@@ -12,7 +12,7 @@ function loadDataTable() {
             { "data": "name", "width": "15%" },
             { "data": "relatedBy", "width": "15%" },
             { "data": "relatedSign", "width": "15%" },
-            
+
             {
                 "data": "id",
                 "render": function (data, type, full, meta) {
