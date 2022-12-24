@@ -12,7 +12,7 @@ function loadDataTable() {
             { "data": "name", "width": "15%" },
             { "data": "relatedBy", "width": "15%" },
             { "data": "relatedSign", "width": "15%" },
-            
+
             {
                 "data": "id",
                 "render": function (data, type, full, meta) {
@@ -56,50 +56,28 @@ function Delete(id) {
     })
 }
 
-$(".unitChange").change(function () {
-    debugger
-    let Unitvalue = $(this).text();
-    var text = $(".unitChange option:selected").text();
+$("#Unit_RelatedUnitId").change(function () {
+    debugger;
+    UnitCount();
+
+});
+
+$('#Unit_Operator').change(function () {
+    debugger;
+    UnitCount();
+});
+$('#Unit_RelatedBy').keyup(function () {
+    debugger;
+    UnitCount();
+});
+function UnitCount() {
+    debugger;
+    var unitName = $("#Unit_Name").val();
+    var relatedBy = $("#Unit_RelatedBy").val();
+    var relatedUnit = $("#Unit_RelatedUnitId option:selected").text();
+    var relatedUnitId = $("#Unit_RelatedUnitId option:selected").val();
+    var operator = $("#Unit_Operator option:selected").val();
+    $('.unit-count label').html("1 " + unitName + "=" + (relatedUnitId != "" ? relatedUnit : "") + " " + operator + " " + (relatedBy > 0 ? relatedBy : ""));
     $('.unit-count').show();
-    $('#unitValue').text(text);
 
-
-
-
-});
-
-$('.opratorChange').change(function () {
-    debugger
-    let existOperatorValue = $('#operatorValue').text();
-    let existUnitValue = $('#unitValue').text();
-    if (existUnitValue == "") {
-        let opratorVal = $(this).val();
-        if (opratorVal == "") {
-            $('.unit-count').show();
-            $('#operatorValue').text("1select Unit");
-
-        }
-        if (opratorVal = "*") {
-            $('.unit-count').show();
-            $('#operatorValue').text("1select Unit*")
-        }
-
-    }
-    if (existUnitValue != "") {
-
-        let opratorVal = $(this).val();
-        if (opratorVal == "") {
-            $('.unit-count').show();
-            $('#operatorValue').text("")
-        }
-        if (opratorVal == "*") {
-            $('#existUnitValue').text("")
-            $('.unit-count').show();
-            $('#operatorValue').text("*")
-        }
-    }
-});
-
-$('.relatedValue').keyup(function () {
-    alert('sdhfshdf');
-})
+}
