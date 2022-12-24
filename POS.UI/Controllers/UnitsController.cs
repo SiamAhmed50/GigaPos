@@ -18,7 +18,7 @@ namespace POS.UI.Controllers
         {
             return View();
         }
-       
+
 
         public IActionResult Upsert(int? id)
         {
@@ -36,7 +36,7 @@ namespace POS.UI.Controllers
             };
             if (id == null || id == 0)
             {
-            
+
                 return View(unitVM);
             }
             else
@@ -51,33 +51,31 @@ namespace POS.UI.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public IActionResult Upsert(UnitVM obj)
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(UnitVM model)
         {
             if (ModelState.IsValid)
             {
-                var model = new Unit();
-                model = obj.Unit;
-                
-                //Create Product
-                if (model.Id == 0)
+                try
                 {
-
-                    _unitOfWork.Unit.Add(model);
+                    if (model.Unit.Id == 0)
+                    {
+                        _unitOfWork.Unit.Add(model.Unit);
+                    }
+                    else
+                    {
+                        _unitOfWork.Unit.Update(model.Unit);
+                    }
                     _unitOfWork.Save();
+                    TempData["success"] = "Unit Created Succesfully!";
                     return RedirectToAction("Index");
                 }
-
-                //Update Products
-                else
+                catch (Exception ex)
                 {
-                    _unitOfWork.Unit.Update(model);
-                    _unitOfWork.Save();
-                    return RedirectToAction("Index");
+                    var err = ex.Message;
                 }
-
             }
-            return View(obj);
+            return View(model);
         }
 
 
