@@ -12,8 +12,8 @@ using POS.DAL.Data;
 namespace POS.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221210123558_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221224074313_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -393,14 +393,14 @@ namespace POS.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RelatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RelatedSign")
-                        .IsRequired()
+                    b.Property<string>("Operator")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RelatedUnitId")
+                    b.Property<int?>("RelatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RelatedUnitId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");

@@ -392,16 +392,18 @@ namespace POS.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Operator")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RelatedBy")
+                    b.Property<int?>("RelatedBy")
                         .HasColumnType("int");
 
-                    b.Property<int>("RelatedUnitId")
+                    b.Property<int?>("RelatedUnitId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RelatedUnitId");
 
                     b.ToTable("Units");
                 });
@@ -482,6 +484,17 @@ namespace POS.DAL.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Unit");
+                });
+
+            modelBuilder.Entity("POS.Models.EntityModel.Unit", b =>
+                {
+                    b.HasOne("POS.Models.EntityModel.Unit", "RelatedUnit")
+                        .WithMany()
+                        .HasForeignKey("RelatedUnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RelatedUnit");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace POS.DAL.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -106,9 +106,9 @@ namespace POS.DAL.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RelatedUnitId = table.Column<int>(type: "int", nullable: false),
-                    RelatedSign = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RelatedBy = table.Column<int>(type: "int", nullable: false),
+                    RelatedUnitId = table.Column<int>(type: "int", nullable: true),
+                    Operator = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RelatedBy = table.Column<int>(type: "int", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },

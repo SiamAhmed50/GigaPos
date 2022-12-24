@@ -10,15 +10,25 @@ function loadDataTable() {
         },
         "columns": [
             { "data": "name", "width": "15%" },
+            { "data": "relatedUnit.name", "width": "15%" },
+            { "data": "operator", "width": "15%" },
             { "data": "relatedBy", "width": "15%" },
-            { "data": "relatedSign", "width": "15%" },
+
+            {
+                "title":"Result",
+                "render": function (data, type, row, meta) {
+                   // return '<span>' + row.name + ' = ' + +'1 ' + row.relatedUnit.name + ' ' + row.operator + ' ' + row.relatedBy+ '</span > '
+
+                    return 'Test';
+                }
+            },
 
             {
                 "data": "id",
-                "render": function (data, type, full, meta) {
+                "render": function (data, type,row, full, meta) {
                     return '<div class="w-75 btn-group" role = "group">'
-                        + '<a href="/Units/Upsert?Id=' + data + '" class="btn btn-primary mx-2" > <i class="bi bi-pencil-square"></i> Edit</a >' +
-                        '<a onClick="Delete(' + data + ')" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a></div > '
+                        + '<a href="/Units/Upsert?Id=' + row.id + '" class="btn btn-primary mx-2" > <i class="bi bi-pencil-square"></i> Edit</a >' +
+                        '<a onClick="Delete(' + row.id + ')" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a></div > '
                 }
             },
 

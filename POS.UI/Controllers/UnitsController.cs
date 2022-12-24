@@ -9,9 +9,11 @@ namespace POS.UI.Controllers
     public class UnitsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public UnitsController(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _webHost;
+        public UnitsController(IUnitOfWork unitOfWork, IWebHostEnvironment webHost)
         {
             _unitOfWork = unitOfWork;
+            this._webHost = webHost;
         }
 
         public IActionResult Index()
@@ -51,10 +53,10 @@ namespace POS.UI.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public IActionResult Upsert(UnitVM model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
