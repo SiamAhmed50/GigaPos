@@ -91,6 +91,8 @@ namespace POS.UI.Controllers
         public IActionResult Upsert(ProductVM obj, IFormFile? file)
         {
 
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+
             if (ModelState.IsValid)
             {
                 var model = new Product();
@@ -125,9 +127,13 @@ namespace POS.UI.Controllers
                 //Create Product
                 if (obj.Product.Id == 0)
                 {
-                    
 
-                  
+                    _unitOfWork.Product.Add(model);
+                    _unitOfWork.Save();
+                    TempData["success"] = "Unit Created Succesfully!";
+                    return RedirectToAction("Index");
+
+
                 }
 
                 //Update Products

@@ -12,14 +12,12 @@ namespace POS.Models.AppVM
     public class ProductVM
     {
         public Product Product { get; set; }
-
-        public IFormFile Image { get; set; }
-
+         
         [ValidateNever]
-        public IEnumerable<SelectListItem> CategoryList { get; set; }
+        public IEnumerable<SelectListItem>? CategoryList { get; set; }
         [ValidateNever]
-        public IEnumerable<SelectListItem> UnitList { get; set; }
+        public IEnumerable<SelectListItem>? UnitList { get; set; }
         [ValidateNever]
-        public IEnumerable<SelectListItem> BrandList { get; set; }
+        public IEnumerable<SelectListItem>? BrandList { get; set; }
     }
 }

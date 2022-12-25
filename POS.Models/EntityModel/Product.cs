@@ -52,15 +52,15 @@ namespace POS.Models.EntityModel
 
         [ForeignKey("CategoryId")]
         [ValidateNever]
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
 
 
         [ForeignKey("BrandId")]
         [ValidateNever]
-        public Brand Brand { get; set; }
+        public Brand? Brand { get; set; }
 
         [ForeignKey("UnitId")]
         [ValidateNever]
-        public Unit Unit { get; set; }
+        public Unit? Unit { get; set; }
     }
 }
