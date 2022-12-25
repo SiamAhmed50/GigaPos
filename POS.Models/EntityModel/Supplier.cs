@@ -4,11 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace POS.Models.EntityModel
 {
-    public class Supplier:BaseEntity
+    public class Supplier : BaseEntity
     {
         [Required]
         [Display(Name = "Supplier Name")]
@@ -17,13 +16,13 @@ namespace POS.Models.EntityModel
         [EmailAddress]
         public string Email { get; set; }
 
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
         [Required]
         public string Phone { get; set; }
         [Display(Name = "Opening Receivable")]
-        public string OpeningReceivable { get; set; }
+        public string? OpeningReceivable { get; set; }
         [Display(Name = "Opening Payable")]
-        public string OpeningPayable { get; set; }
+        public string? OpeningPayable { get; set; }
     }
 }

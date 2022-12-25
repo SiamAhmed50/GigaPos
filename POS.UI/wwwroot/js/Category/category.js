@@ -5,16 +5,18 @@ $(document).ready(function () {
 
 function loadDataTable() {
     dataTable = $('#CategoryTbl').DataTable({
+        "autoWidth": true,
         "ajax": {
             "url": "/Categories/GetAll"
         },
         "columns": [
-            { "data": "name", "width": "15%" },
-            { "data": "displayOrder", "width": "15%" }, 
+            { "data": "name", "width": "30%" },
+            { "data": "displayOrder", "width": "30%" }, 
             {
                 "data": "id",
+                "width": "40%",
                 "render": function (data, type, full, meta) {
-                    return '<div class="w-75 btn-group" role = "group">'
+                    return '<div class=" btn-group" role = "group">'
                         + '<a href="/Categories/Edit?Id=' + data + '" class="btn btn-primary mx-2" > <i class="bi bi-pencil-square"></i> Edit</a >' +
                         '<a onClick="Delete(' + data + ')" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a></div > '
                 }
