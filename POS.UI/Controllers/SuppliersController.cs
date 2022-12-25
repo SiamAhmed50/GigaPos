@@ -23,84 +23,84 @@ namespace POS.UI.Controllers
 
         public IActionResult Upsert(int? id)
         {
-        //    List<Supplier> supplierList = new List<Supplier>();
-        //    supplierList = _unitOfWork.Suppler.GetAll().ToList();
+            List<Supplier> supplierList = new List<Supplier>();
+            supplierList = _unitOfWork.Supplier.GetAll().ToList();
 
-        //    CustomerVM customerVM = new()
-        //    {
-        //        Customer = new(),
+            SupplierVM supplierVM = new()
+            {
+                Supplier = new(),
 
-        //    };
-        //    if (id == null || id == 0)
-        //    {
+            };
+            if (id == null || id == 0)
+            {
 
-        //        return View(customerVM);
-        //    }
-        //    else
-        //    {
-        //        customerVM.Customer = _unitOfWork.Customer.GetFirstOrDefault(x => x.Id == id);
-        //        return View(customerVM);
-         //}
+                return View(supplierVM);
+            }
+            else
+            {
+                supplierVM.Supplier = _unitOfWork.Supplier.GetFirstOrDefault(x => x.Id == id);
+                return View(supplierVM);
+            }
 
 
 
-           return View();
+         
         }
 
-        //[HttpPost]
-        ////[ValidateAntiForgeryToken]
-        //public IActionResult Upsert(CustomerVM model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            if (model.Customer.Id == 0)
-        //            {
-        //                _unitOfWork.Customer.Add(model.Customer);
-        //            }
-        //            else
-        //            {
-        //                _unitOfWork.Customer.Update(model.Customer);
-        //            }
-        //            _unitOfWork.Save();
-        //            TempData["success"] = "Customer Created Succesfully!";
-        //            return RedirectToAction("Index");
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            var err = ex.Message;
-        //        }
-        //    }
-        //    return View(model);
-        //}
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public IActionResult Upsert(SupplierVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (model.Supplier.Id == 0)
+                    {
+                        _unitOfWork.Supplier.Add(model.Supplier);
+                    }
+                    else
+                    {
+                        _unitOfWork.Supplier.Update(model.Supplier);
+                    }
+                    _unitOfWork.Save();
+                    TempData["success"] = "Supplier Created Succesfully!";
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    var err = ex.Message;
+                }
+            }
+            return View(model);
+        }
 
 
 
-        //#region API Calls
-        //[HttpGet]
-        //public IActionResult GetAll()
-        //{
-        //    var customerList = _unitOfWork.Customer.GetAll();
+        #region API Calls
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var supplierList = _unitOfWork.Supplier.GetAll();
 
-        //    return Json(new { data = customerList });
-        //}
+            return Json(new { data = supplierList });
+        }
 
-        //[HttpDelete]
-        //public IActionResult Delete(int? id)
-        //{
+        [HttpDelete]
+        public IActionResult Delete(int? id)
+        {
 
-        //    var customer = _unitOfWork.Customer.GetFirstOrDefault(f => f.Id == id);
-        //    if (customer == null)
-        //    {
-        //        return Json(new { success = false, message = "Error while Deleting" });
-        //    }
+            var supplier = _unitOfWork.Supplier.GetFirstOrDefault(f => f.Id == id);
+            if (supplier == null)
+            {
+                return Json(new { success = false, message = "Error while Deleting" });
+            }
 
-        //    _unitOfWork.Customer.Remove(customer);
-        //    _unitOfWork.Save();
-        //    return Json(new { success = true, message = "Deleted Successfully!" });
-        //}
-        //#endregion
+            _unitOfWork.Supplier.Remove(supplier);
+            _unitOfWork.Save();
+            return Json(new { success = true, message = "Deleted Successfully!" });
+        }
+        #endregion
 
 
     }
