@@ -10,6 +10,22 @@ function loadDataTable() {
         },
         "columns": [
             { "data": "name", "width": "15%" },
+            { "data": "description", "width": "15%" },
+            
+            {
+                "data": "logoUrl",
+                "render": function (data, type, full, meta) {
+
+                    return '<img src="'+data+'" width="40%" height="50px"/>'
+                }
+            },
+            {
+                "title": "Count Products",
+                "render": function (data, type, full, meta) {
+
+                    return ' ';
+                }
+            },
            
             {
                 "data": "id",

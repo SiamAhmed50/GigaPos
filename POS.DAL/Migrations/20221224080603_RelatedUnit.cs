@@ -19,7 +19,8 @@ namespace POS.DAL.Migrations
                 column: "RelatedUnitId",
                 principalTable: "Units",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction,
+                onUpdate:ReferentialAction.NoAction);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

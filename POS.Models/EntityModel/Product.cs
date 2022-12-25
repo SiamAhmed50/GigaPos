@@ -13,21 +13,21 @@ namespace POS.Models.EntityModel
        
         [Required]
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
         [Required]
         [Display(Name ="Category")]
         public int CategoryId { get; set; }
         [Display(Name = "Brand")]
-        public int BrandId { get; set; }
+        public int? BrandId { get; set; }
         [Display(Name = "Unit")]
-        public int UnitId { get; set; }
+        public int? UnitId { get; set; }
         [Display(Name = "Sub Unit")]
-        public int SubUnit { get; set; }
+        public int? SubUnit { get; set; }
         [Display(Name = "Openning Stock")]
-        public string OpenningStock { get; set; }
+        public string? OpenningStock { get; set; }
 
 
         [Required]

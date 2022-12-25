@@ -10,14 +10,41 @@ function loadDataTable() {
         },
         "columns": [
             { "data": "name", "width": "15%" },
-            { "data": "relatedUnit.name", "width": "15%" },
+            {
+                "title": "Related Unit Name",
+                "render": function (data, type, full, meta) {
+                    
+                    var relatedUnit = full['relatedUnit'];
+                    if (relatedUnit != null) {
+                        var relatedUnitName = relatedUnit.name;
+                        return '<span>'   + relatedUnitName + '</span > '
+                    }
+                    else {
+                        return '';
+                    }
+
+
+
+                    
+                }
+            },
             { "data": "operator", "width": "15%" },
             { "data": "relatedBy", "width": "15%" },
 
             {
                 "title":"Result",
-                "render": function (data, type, row, meta) {
-                   // return '<span>' + row.name + ' = ' + +'1 ' + row.relatedUnit.name + ' ' + row.operator + ' ' + row.relatedBy+ '</span > '
+                "render": function (data, type, full, meta) {
+                    debugger;
+                    var relatedUnit = full['relatedUnit'];
+                    if (relatedUnit != null) {
+                        var relatedUnitName = relatedUnit.name;
+                        return '<span>' + full['name'] + ' = ' + +'1 ' + relatedUnitName + ' ' + full['operator'] + ' ' + full['relatedBy'] + '</span > '
+                    }
+                    else {
+                        return '';
+                    }
+                    
+                   
 
                     return 'Test';
                 }
@@ -25,16 +52,18 @@ function loadDataTable() {
 
             {
                 "data": "id",
-                "render": function (data, type,row, full, meta) {
+                "render": function (data, type, full, meta) {
                     return '<div class="w-75 btn-group" role = "group">'
-                        + '<a href="/Units/Upsert?Id=' + row.id + '" class="btn btn-primary mx-2" > <i class="bi bi-pencil-square"></i> Edit</a >' +
-                        '<a onClick="Delete(' + row.id + ')" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a></div > '
+                        + '<a href="/Units/Upsert?Id=' + data + '" class="btn btn-primary mx-2" > <i class="bi bi-pencil-square"></i> Edit</a >' +
+                        '<a onClick="Delete(' + data + ')" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a></div > '
                 }
             },
 
         ]
 
     });
+
+     
 }
 
 function Delete(id) {

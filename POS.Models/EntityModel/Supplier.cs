@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace POS.Models.EntityModel
 {
-    public class Customer : BaseEntity
+    public class Supplier : BaseEntity
     {
-
         [Required]
-        [Display(Name = "Customer Name")]
-        public string Name { get; set; }
+        [Display(Name = "Supplier Name")]
+        public string SupplierName { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }
