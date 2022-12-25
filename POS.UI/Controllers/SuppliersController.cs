@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using POS.DAL.Repository.IRpository;
 using POS.Models.AppVM;
 using POS.Models.EntityModel;
 
 namespace POS.UI.Controllers
 {
-    public class CustomersController : Controller
+    public class SuppliersController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHost;
-        public CustomersController(IUnitOfWork unitOfWork, IWebHostEnvironment webHost)
+        public SuppliersController(IUnitOfWork unitOfWork, IWebHostEnvironment webHost)
         {
             _unitOfWork = unitOfWork;
             this._webHost = webHost;
@@ -19,53 +18,53 @@ namespace POS.UI.Controllers
         {
             return View();
         }
-        
+
 
 
         public IActionResult Upsert(int? id)
         {
-            List<Customer> unitList = new List<Customer>();
-            unitList = _unitOfWork.Customer.GetAll().ToList();
+            List<Supplier> supplierList = new List<Supplier>();
+            supplierList = _unitOfWork.Supplier.GetAll().ToList();
 
-            CustomerVM customerVM = new()
+            SupplierVM supplierVM = new()
             {
-                Customer = new(),
-                
+                Supplier = new(),
+
             };
             if (id == null || id == 0)
             {
 
-                return View(customerVM);
+                return View(supplierVM);
             }
             else
             {
-                customerVM.Customer = _unitOfWork.Customer.GetFirstOrDefault(x => x.Id == id);
-                return View(customerVM);
+                supplierVM.Supplier = _unitOfWork.Supplier.GetFirstOrDefault(x => x.Id == id);
+                return View(supplierVM);
             }
 
 
 
-            return View();
+         
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Upsert(CustomerVM model)
+        //[ValidateAntiForgeryToken]
+        public IActionResult Upsert(SupplierVM model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    if (model.Customer.Id == 0)
+                    if (model.Supplier.Id == 0)
                     {
-                        _unitOfWork.Customer.Add(model.Customer);
+                        _unitOfWork.Supplier.Add(model.Supplier);
                     }
                     else
                     {
-                        _unitOfWork.Customer.Update(model.Customer);
+                        _unitOfWork.Supplier.Update(model.Supplier);
                     }
                     _unitOfWork.Save();
-                    TempData["success"] = "Customer Created Succesfully!";
+                    TempData["success"] = "Supplier Created Succesfully!";
                     return RedirectToAction("Index");
                 }
                 catch (Exception ex)
@@ -82,25 +81,27 @@ namespace POS.UI.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var customerList = _unitOfWork.Customer.GetAll();
+            var supplierList = _unitOfWork.Supplier.GetAll();
 
-            return Json(new { data = customerList });
+            return Json(new { data = supplierList });
         }
 
         [HttpDelete]
         public IActionResult Delete(int? id)
         {
 
-            var customer = _unitOfWork.Customer.GetFirstOrDefault(f => f.Id == id);
-            if (customer == null)
+            var supplier = _unitOfWork.Supplier.GetFirstOrDefault(f => f.Id == id);
+            if (supplier == null)
             {
                 return Json(new { success = false, message = "Error while Deleting" });
             }
 
-            _unitOfWork.Customer.Remove(customer);
+            _unitOfWork.Supplier.Remove(supplier);
             _unitOfWork.Save();
             return Json(new { success = true, message = "Deleted Successfully!" });
         }
         #endregion
+
+
     }
 }

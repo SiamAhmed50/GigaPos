@@ -20,6 +20,7 @@ namespace POS.DAL.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Unit> Units { get; set; }
         
         public DbSet<AppUser> AppUsers { get; set; }
