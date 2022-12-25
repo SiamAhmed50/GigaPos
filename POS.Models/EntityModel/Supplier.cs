@@ -4,15 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace POS.Models.EntityModel
 {
-    public class Customer : BaseEntity
+    public class Supplier:BaseEntity
     {
-      
         [Required]
-        [Display(Name="Customer Name")]
-        public string Name { get; set; }
+        [Display(Name = "Supplier Name")]
+        public string SupplierName { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }

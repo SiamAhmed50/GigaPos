@@ -1,0 +1,46 @@
+﻿@using POS.Models.EntityModel
+
+@model IEnumerable<Customer>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Customer List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-controller="Customers" asp-action="Upsert" class="btn-primary btn">
+                <i class="fa-solid fa-square-plus"></i> &nbsp; New Customer
+            </a>
+        </div>
+    </div>
+</div>
+<br>
+<table class="table table-bordered table-striped" style="width:100%" id="CustomerTbl">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Receivable</th>
+            <th>Paid</th>
+            <th>Sale Due</th>
+            <th>Wallet Balance</th>
+            <th>Total Due</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+
+
+</table>
+
+@section Scripts{
+    <script src="~/js/Category/category.js"> </script>
+
+}

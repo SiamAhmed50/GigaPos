@@ -1,0 +1,94 @@
+﻿@model SupplierVM
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div p-3">
+    <div class="row">
+        <div class="col-md-12 ">
+
+            <form class="" asp-action="Upsert" method="post">
+                <div class="border mt-4 p-3">
+                    <div class="row pb-2">
+                        <h2 class="text-primary">Create Supplier</h2>
+                        <hr />
+
+                    </div>
+
+                    <input hidden asp-for="Supplier.Id" />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label asp-for="Supplier.SupplierName"></label>
+                                <input asp-for="Supplier.SupplierName" class="form-control" />
+                                <span asp-validation-for="Supplier.SupplierName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label asp-for="Supplier.Email"></label>
+                                <input asp-for="Supplier.Email" class="form-control" />
+                                <span asp-validation-for="Supplier.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label asp-for="Supplier.Address"></label>
+                                <textarea asp-for="Supplier.Address" class="form-control"></textarea>
+                                <span asp-validation-for="Supplier.Address" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label asp-for="Supplier.Phone"></label>
+                                <input asp-for="Supplier.Phone" class="form-control" />
+                                <span asp-validation-for="Supplier.Phone" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label asp-for="Supplier.OpeningReceivable"></label>
+                                <input asp-for="Supplier.OpeningReceivable" class="form-control" />
+                                <span asp-validation-for="Supplier.OpeningReceivable" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label asp-for="Supplier.OpeningPayable"></label>
+                                <input asp-for="Supplier.OpeningPayable" class="form-control" />
+                                <span asp-validation-for="Supplier.OpeningPayable" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-2 text-center unit-count" style="display:none">
+                        <label for="">1= </label>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary" style="width:150px">Submit</button>
+                        <a asp-controller="Suppliers" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts
+    {
+
+    @{
+        <partial name="_ValidationScriptsPartial.cshtml" />
+
+    }
+    <script src="~/js/Supplier/supplier.js"></script>
+}
+
+

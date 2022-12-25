@@ -19,6 +19,7 @@ namespace POS.DAL.Repository
             Brand = new BrandRepository(_db);
             Unit = new UnitRepository(_db);
             Customer = new CustomerRepository(_db);
+            Supplier = new SupplierRepository(_db);
         }
 
         public ICategoryRepository Category { get; private set; }
@@ -26,6 +27,7 @@ namespace POS.DAL.Repository
         public IBrandRepository Brand { get; private set; }
         public IUnitRepository Unit { get; private set; }
         public ICustomerRepository Customer { get; private set; }
+        public ISupplierRepository Supplier { get; private set; }
       
 
         public void Save()

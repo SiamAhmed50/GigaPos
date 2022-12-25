@@ -12,8 +12,8 @@ using POS.DAL.Data;
 namespace POS.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221224080603_RelatedUnit")]
-    partial class RelatedUnit
+    [Migration("20221224134119_InitialCreateDB")]
+    partial class InitialCreateDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -301,6 +301,14 @@ namespace POS.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OpeningPayable")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OpeningReceivable")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

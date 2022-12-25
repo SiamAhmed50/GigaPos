@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace POS.DAL.Migrations
 {
-    public partial class Init : Migration
+    public partial class InitialCreateDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -91,6 +91,8 @@ namespace POS.DAL.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OpeningReceivable = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OpeningPayable = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -106,7 +108,7 @@ namespace POS.DAL.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RelatedUnitId = table.Column<int>(type: "int", nullable: true),
+                    RelatedUnitId = table.Column<int>(type: "int", nullable: false),
                     Operator = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RelatedBy = table.Column<int>(type: "int", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -115,6 +117,12 @@ namespace POS.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Units", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Units_Units_RelatedUnitId",
+                        column: x => x.RelatedUnitId,
+                        principalTable: "Units",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -319,6 +327,11 @@ namespace POS.DAL.Migrations
                 name: "IX_Products_UnitId",
                 table: "Products",
                 column: "UnitId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Units_RelatedUnitId",
+                table: "Units",
+                column: "RelatedUnitId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
