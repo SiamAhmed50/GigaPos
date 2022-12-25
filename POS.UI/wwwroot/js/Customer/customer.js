@@ -11,26 +11,44 @@ function loadDataTable() {
             "url": "/Customers/GetAll"
         },
         "columns": [
-            { "data": "1", "width": "30%" },
+     
             { "data": "name", "width": "30%" },
             { "data": "email", "width": "30%" },
             { "data": "phone", "width": "30%" },
             { "data": "address", "width": "30%" },
             { "data": "openingReceivable", "width": "30%" },
             { "data": "openingPayable", "width": "30%" },
-            { "data": "", "width": "30%" },
-            { "data": "", "width": "30%" },
-            { "data": "", "width": "30%" },
-           
-            //{
-            //    "data": "id",
-            //    "width": "40%",
-            //    "render": function (data, type, full, meta) {
-            //        return '<div class=" btn-group" role = "group">'
-            //            + '<a href="/Categories/Edit?Id=' + data + '" class="btn btn-primary mx-2" > <i class="bi bi-pencil-square"></i> Edit</a >' +
-            //            '<a onClick="Delete(' + data + ')" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a></div > '
-            //    }
-            //},
+            {
+                "data": "",
+                "width": "30%",
+                "render": function (data, type, full, meta) {
+                    return ' ';
+                }
+            },
+            {
+                "data": "",
+                "width": "30%",
+                "render": function (data, type, full, meta) {
+                    return ' ';
+                }
+            },
+            {
+                "data": "",
+                "width": "30%",
+                "render": function (data, type, full, meta) {
+                    return ' ';
+                }
+            },
+
+            {
+                "data": "id",
+                "width": "40%",
+                "render": function (data, type, full, meta) {
+                    return '<div class=" btn-group" role = "group">'
+                        + '<a href="/Categories/Edit?Id=' + data + '" class="btn btn-primary mx-2" > <i class="bi bi-pencil-square"></i> Edit</a >' +
+                        '<a onClick="Delete(' + data + ')" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a></div > '
+                }
+            },
 
         ]
 
