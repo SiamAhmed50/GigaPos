@@ -70,6 +70,7 @@ function Delete(id) {
     })
 }
 
+
 //<div class="w-15 btn-group align-content-center" role="group">
 //    <a href="/Admin/Proucts/Upsert?id=${data}" class="btn btn-primary mx-1"><i class="bi bi-pencil-square"></i>&nbsp; Edit</a>
 //    <a class="btn btn-danger mx-1"><i class="bi bi-trash-fill"></i>&nbsp; Delete</a>

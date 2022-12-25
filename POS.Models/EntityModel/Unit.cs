@@ -15,7 +15,7 @@ namespace POS.Models.EntityModel
         [Required]
         public string Name { get; set; }
 
-        [Required]
+ 
         [Display(Name = "Related To Unit")]
 
         public int? RelatedUnitId { get; set; }

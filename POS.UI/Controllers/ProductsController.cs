@@ -36,7 +36,7 @@ namespace POS.UI.Controllers
            
             List<Unit> unitList = new List<Unit>();
             List<Brand> brandList = new List<Brand>();
-            ViewBag.SubUnitList=
+           
 
             categoryList = _unitOfWork.Category.GetAll().ToList();
             unitList = _unitOfWork.Unit.GetAll().ToList();
@@ -156,6 +156,7 @@ namespace POS.UI.Controllers
                 return Json(new { data = itemVm });
             
         }
+       
         [HttpDelete]
         public IActionResult Delete(int? id)
         {

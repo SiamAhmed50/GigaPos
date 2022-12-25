@@ -56,7 +56,7 @@ namespace POS.UI.Controllers
         //[ValidateAntiForgeryToken]
         public IActionResult Upsert(UnitVM model)
         {
-            if (!ModelState.IsValid)
+            if (!string.IsNullOrWhiteSpace(model.Unit.Name))
             {
                 try
                 {
@@ -80,8 +80,6 @@ namespace POS.UI.Controllers
             return View(model);
         }
 
-
-
         #region API Calls
         [HttpGet]
         public IActionResult GetAll()
@@ -89,6 +87,14 @@ namespace POS.UI.Controllers
             var unitList = _unitOfWork.Unit.GetAll();
 
             return Json(new { data = unitList });
+        }
+        [HttpGet]
+        public IActionResult GetById(int Id)
+        {
+            var unit = _unitOfWork.Unit.GetFirstOrDefault(f => f.Id == Id);
+            var relatedUnit = _unitOfWork.Unit.GetFirstOrDefault(f => f.Id == unit.RelatedUnitId);
+            unit.RelatedUnit = relatedUnit;
+            return Json(new { data = unit });
         }
 
         [HttpDelete]
@@ -100,6 +106,7 @@ namespace POS.UI.Controllers
             {
                 return Json(new { success = false, message = "Error while Deleting" });
             }
+           
 
             _unitOfWork.Unit.Remove(unit);
             _unitOfWork.Save();

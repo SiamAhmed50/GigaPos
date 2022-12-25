@@ -350,7 +350,10 @@ namespace POS.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OpenningStock")
+                    b.Property<string>("OpenningStockSubUnit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OpenningStockUnit")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("PurchaseCost")
@@ -359,7 +362,7 @@ namespace POS.DAL.Migrations
                     b.Property<double>("SalePrice")
                         .HasColumnType("float");
 
-                    b.Property<int?>("SubUnit")
+                    b.Property<int?>("SubUnitId")
                         .HasColumnType("int");
 
                     b.Property<int?>("UnitId")
@@ -442,7 +445,6 @@ namespace POS.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("RelatedUnitId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -534,9 +536,7 @@ namespace POS.DAL.Migrations
                 {
                     b.HasOne("POS.Models.EntityModel.Unit", "RelatedUnit")
                         .WithMany()
-                        .HasForeignKey("RelatedUnitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RelatedUnitId");
 
                     b.Navigation("RelatedUnit");
                 });

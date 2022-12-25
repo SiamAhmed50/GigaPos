@@ -102,33 +102,13 @@ namespace POS.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Suppliers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SupplierName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OpeningReceivable = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OpeningPayable = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Suppliers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Units",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RelatedUnitId = table.Column<int>(type: "int", nullable: false),
+                    RelatedUnitId = table.Column<int>(type: "int", nullable: true),
                     Operator = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RelatedBy = table.Column<int>(type: "int", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -141,8 +121,7 @@ namespace POS.DAL.Migrations
                         name: "FK_Units_Units_RelatedUnitId",
                         column: x => x.RelatedUnitId,
                         principalTable: "Units",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -263,8 +242,9 @@ namespace POS.DAL.Migrations
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     BrandId = table.Column<int>(type: "int", nullable: false),
                     UnitId = table.Column<int>(type: "int", nullable: false),
-                    SubUnit = table.Column<int>(type: "int", nullable: true),
-                    OpenningStock = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SubUnitId = table.Column<int>(type: "int", nullable: true),
+                    OpenningStockUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OpenningStockSubUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SalePrice = table.Column<double>(type: "float", nullable: false),
                     PurchaseCost = table.Column<double>(type: "float", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -376,9 +356,6 @@ namespace POS.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "Suppliers");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace POS.Models.EntityModel
 {
@@ -13,6 +14,8 @@ namespace POS.Models.EntityModel
        
         [Required]
         public string Name { get; set; }
+
+        [AllowHtml]
         public string? Description { get; set; }
 
         public string? Code { get; set; }
@@ -25,9 +28,10 @@ namespace POS.Models.EntityModel
         [Display(Name = "Unit")]
         public int? UnitId { get; set; }
         [Display(Name = "Sub Unit")]
-        public int? SubUnit { get; set; }
-        [Display(Name = "Openning Stock")]
-        public string? OpenningStock { get; set; }
+        public int? SubUnitId { get; set; }
+   
+        public string? OpenningStockUnit { get; set; }
+        public string? OpenningStockSubUnit { get; set; }
 
 
         [Required]
