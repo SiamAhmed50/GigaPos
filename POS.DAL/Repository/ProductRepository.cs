@@ -29,8 +29,9 @@ namespace POS.DAL.Repository
                 objFromDb.CategoryId = obj.CategoryId;
                 objFromDb.BrandId = obj.BrandId;
                 objFromDb.UnitId = obj.UnitId;
-                objFromDb.SubUnit = obj.SubUnit;
-                objFromDb.OpenningStock = obj.OpenningStock;
+                objFromDb.SubUnitId = obj.SubUnitId;
+                objFromDb.OpenningStockUnit = obj.OpenningStockUnit;
+                objFromDb.OpenningStockSubUnit = obj.OpenningStockSubUnit;
                 objFromDb.SalePrice = obj.SalePrice;
                 objFromDb.PurchaseCost = obj.PurchaseCost;
                 if (obj.ImageUrl != null)

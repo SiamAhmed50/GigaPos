@@ -29,16 +29,16 @@
                     <h2 class="text-primary">@(Model.Product.Id == 0 ? "Create" : "Update") Product</h2>
                     <hr />
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 col-md-6">
                     <label asp-for="Product.Name"></label>
                     <input asp-for="Product.Name" class="form-control" />
                     <span asp-validation-for="Product.Name" class="text-danger"></span>
                 </div>
-                <div class="mb-3">
-                    <label asp-for="Product.Description"></label>
-                    <textarea asp-for="Product.Description" class="form-control"></textarea>
-                    <span asp-validation-for="Product.Description" class="text-danger"></span>
-                </div>
+                 <div class="mb-3 col-md-6">
+                    <label asp-for="Product.Code"></label>
+                    <input asp-for="Product.Code" class="form-control" />
+                    <span asp-validation-for="Product.Code" class="text-danger"></span>
+                </div> 
                 <div class="mb-3 col-md-6">
                     <label asp-for="Product.CategoryId"></label>
                     <select asp-for="Product.CategoryId" class="form-select" asp-items="@Model.CategoryList">
@@ -51,30 +51,33 @@
                     <select asp-for="Product.BrandId" class="form-select" asp-items="@Model.BrandList">
                         <option disabled selected>--Select Brand--</option>
                     </select>
-                    <span asp-validation-for="Product.UnitId" class="text-danger"></span>
-                </div>
-                <div class="mb-3 col-md-6">
-                    <label asp-for="Product.Code"></label>
-                    <input asp-for="Product.Code" class="form-control" />
-                    <span asp-validation-for="Product.Code" class="text-danger"></span>
-                </div>
-                <div class="mb-3  col-md-6">
-                    <label asp-for="Product.OpenningStock"></label>
-                    <input asp-for="Product.OpenningStock" class="form-control" />
-                    <span asp-validation-for="Product.OpenningStock" class="text-danger"></span>
+                    <span asp-validation-for="Product.BrandId" class="text-danger"></span>
                 </div>
                 <div class="mb-3 col-md-6">
                     <label asp-for="Product.UnitId"></label>
                     <select asp-for="Product.UnitId" class="form-select"  asp-items="@Model.UnitList">
-                        <option disabled selected>--Select Unit--</option>
+                       
                     </select>
                     <span asp-validation-for="Product.UnitId" class="text-danger"></span>
                 </div>
                 <div class="mb-3 col-md-6">
-                    <label asp-for="Product.SubUnit"></label>
-                    <input asp-for="Product.SubUnit" class="form-control" />
-                    <span asp-validation-for="Product.SubUnit" class="text-danger"></span>
+                    <label asp-for="Product.SubUnitId"></label>
+                     <select asp-for="Product.SubUnitId" class="form-select">
+                        <option selected value="0" class="defaultSubUnitOption">--Select Unit--</option>
+                    </select>
+                    <span asp-validation-for="Product.SubUnitId" class="text-danger"></span>
                 </div>
+                <div class="mb-3  col-md-12 openningStockUnit">
+                    <label>Openning Stock</label>
+                    <input asp-for="Product.OpenningStockUnit" type="text" class="form-control" />
+                    <span asp-validation-for="Product.OpenningStockUnit" class="text-danger"></span>
+                </div>
+                 <div class="mb-3  col-md-6 d-none openningStockSubUnit">
+                    
+                    <input asp-for="Product.OpenningStockSubUnit" class="form-control" />
+                    <span asp-validation-for="Product.OpenningStockSubUnit" class="text-danger"></span>
+                </div>
+               
                 
                 <div class="mb-3  col-md-6">
                     <label asp-for="Product.PurchaseCost"></label>
@@ -86,7 +89,11 @@
                     <input asp-for="Product.SalePrice" class="form-control" />
                     <span asp-validation-for="Product.SalePrice" class="text-danger"></span>
                 </div>
-           
+                <div class="mb-3">
+                    <label asp-for="Product.Description"></label>
+                    <textarea asp-for="Product.Description" class="form-control"></textarea>
+                    <span asp-validation-for="Product.Description" class="text-danger"></span>
+                </div>
 
 
                 <div class="col-md-12 ">
@@ -113,8 +120,51 @@
     @{
         <partial name="_ValidationScriptsPartial" />
     }
-}
-<script>
+    
+  
+<script type="text/javascript">
+    
+ $("#Product_UnitId").on('change', function (data) {
+    debugger;
+    var unitId = $("#Product_UnitId").val();
+    $.get("/Units/GetById/" + unitId, function (data, status) {
+        debugger;
+         var obj = data.data;
+       if(obj.relatedUnit == null){ 
+           $("#Product_SubUnitId").find("option:not(:first)").remove();
+           $(".defaultSubUnitOption").html("No related unit found!");
+          $("#Product_SubUnitId").val(0).change();
+       }
+       else{
+           var option = '<option selected value="###subunitid###">###subunitname###</option>';
+           option = option.replace("###subunitid###",obj.relatedUnitId).replace("###subunitname###",obj.relatedUnit.name);
+           $("#Product_SubUnitId").append(option);
+           $(".defaultSubUnitOption").html("--Select Unit--");
+          $("#Product_SubUnitId").val(0).change();
+             
+       }
+       $("#Product_OpenningStockUnit").attr("placeholder",obj.name);
+    });
+
+});
+
+ $("#Product_SubUnitId").on('change', function (data) {
+     debugger;
+     if($("#Product_SubUnitId option:selected").val() > 0){
+           var name =  $("#Product_SubUnitId option:selected").text();
+     $("#Product_OpenningStockSubUnit").attr("placeholder",name);
+     $(".openningStockUnit").removeClass("col-md-12");
+     $(".openningStockUnit").addClass("col-md-6");
+     $(".openningStockSubUnit").removeClass("d-none");
+     }
+     else{
+            $(".openningStockSubUnit").addClass("d-none");
+             $(".openningStockUnit").removeClass("col-md-6");
+               $(".openningStockUnit").addClass("col-md-12");
+     }
+   
+ });
+   
 
     //Image Change
     document.getElementById('uploadbox').onchange = function () {
@@ -138,5 +188,8 @@
 
     }
 </script>
+}
+
+
 
 

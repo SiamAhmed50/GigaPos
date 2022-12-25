@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using POS.Models.EntityModel;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,9 @@ namespace POS.Models.AppVM
     public class ProductVM
     {
         public Product Product { get; set; }
+
+        public IFormFile Image { get; set; }
+
         [ValidateNever]
         public IEnumerable<SelectListItem> CategoryList { get; set; }
         [ValidateNever]

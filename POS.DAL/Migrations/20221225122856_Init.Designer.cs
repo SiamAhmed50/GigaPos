@@ -12,8 +12,8 @@ using POS.DAL.Data;
 namespace POS.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221224080603_RelatedUnit")]
-    partial class RelatedUnit
+    [Migration("20221225122856_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -287,7 +287,6 @@ namespace POS.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
@@ -302,6 +301,12 @@ namespace POS.DAL.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OpeningPayable")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OpeningReceivable")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
@@ -321,21 +326,20 @@ namespace POS.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("BrandId")
+                    b.Property<int?>("BrandId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Code")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
@@ -348,8 +352,10 @@ namespace POS.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OpenningStock")
-                        .IsRequired()
+                    b.Property<string>("OpenningStockSubUnit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OpenningStockUnit")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("PurchaseCost")
@@ -358,10 +364,11 @@ namespace POS.DAL.Migrations
                     b.Property<double>("SalePrice")
                         .HasColumnType("float");
 
-                    b.Property<int>("SubUnit")
+                    b.Property<int?>("SubUnitId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UnitId")
+                    b.Property<int?>("UnitId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -400,7 +407,6 @@ namespace POS.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("RelatedUnitId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -492,9 +498,7 @@ namespace POS.DAL.Migrations
                 {
                     b.HasOne("POS.Models.EntityModel.Unit", "RelatedUnit")
                         .WithMany()
-                        .HasForeignKey("RelatedUnitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RelatedUnitId");
 
                     b.Navigation("RelatedUnit");
                 });

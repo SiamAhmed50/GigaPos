@@ -89,8 +89,10 @@ namespace POS.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OpeningReceivable = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OpeningPayable = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -115,6 +117,11 @@ namespace POS.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Units", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Units_Units_RelatedUnitId",
+                        column: x => x.RelatedUnitId,
+                        principalTable: "Units",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -230,13 +237,14 @@ namespace POS.DAL.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     BrandId = table.Column<int>(type: "int", nullable: false),
                     UnitId = table.Column<int>(type: "int", nullable: false),
-                    SubUnit = table.Column<int>(type: "int", nullable: false),
-                    OpenningStock = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SubUnitId = table.Column<int>(type: "int", nullable: true),
+                    OpenningStockUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OpenningStockSubUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SalePrice = table.Column<double>(type: "float", nullable: false),
                     PurchaseCost = table.Column<double>(type: "float", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -319,6 +327,11 @@ namespace POS.DAL.Migrations
                 name: "IX_Products_UnitId",
                 table: "Products",
                 column: "UnitId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Units_RelatedUnitId",
+                table: "Units",
+                column: "RelatedUnitId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
