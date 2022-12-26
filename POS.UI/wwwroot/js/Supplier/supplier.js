@@ -22,15 +22,15 @@ function loadDataTable() {
             { "data": "", "width": "30%" },
             { "data": "", "width": "30%" },
            
-            //{
-            //    "data": "id",
-            //    "width": "40%",
-            //    "render": function (data, type, full, meta) {
-            //        return '<div class=" btn-group" role = "group">'
-            //            + '<a href="/Categories/Edit?Id=' + data + '" class="btn btn-primary mx-2" > <i class="bi bi-pencil-square"></i> Edit</a >' +
-            //            '<a onClick="Delete(' + data + ')" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a></div > '
-            //    }
-            //},
+            {
+                "data": "id",
+                "width": "40%",
+                "render": function (data, type, full, meta) {
+                    return '<div class=" btn-group" role = "group">'
+                        + '<a href="/Categories/Edit?Id=' + data + '" class="btn btn-primary mx-2" > <i class="bi bi-pencil-square"></i> Edit</a >' +
+                        '<a onClick="Delete(' + data + ')" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a></div > '
+                }
+            },
 
         ]
 
