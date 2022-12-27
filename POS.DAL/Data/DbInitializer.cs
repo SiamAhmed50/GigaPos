@@ -54,7 +54,7 @@ namespace POS.DAL.Data
                 AppUser appUser = new AppUser();
                 appUser.UserName = _userName;
                 appUser.Email = _email;
-                appUser.EmailConfirmed = false;
+                appUser.EmailConfirmed = true;
               
 
                 //    //_userManager = new UserManager<AppUser>();

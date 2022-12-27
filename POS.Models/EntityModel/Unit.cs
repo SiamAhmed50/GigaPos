@@ -28,6 +28,6 @@ namespace POS.Models.EntityModel
 
         [ForeignKey("RelatedUnitId")]
         [ValidateNever]
-        public Unit RelatedUnit { get; set; }
+        public Unit? RelatedUnit { get; set; }
     }
 }

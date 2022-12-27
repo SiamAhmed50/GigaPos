@@ -13,10 +13,18 @@ function loadDataTable() {
             "url": "/Products/GetAll"
         },
         "columns": [
-            { "data": "name", "width": "15%" },
+            {
+                "data": "imageUrl",
+                "render": function (data, type, full, meta) {
+
+                    return '<img src="'+data+'" width="100%" height="50px"/>'
+                }
+            },
             { "data": "code", "width": "15%" },
+            { "data": "name", "width": "15%" },
             { "data": "category.name", "width": "15%" },
-            { "data": "unit.name", "width": "15%" },
+            { "data": "brand.name", "width": "15%" },
+          
             { "data": "salePrice", "width": "15%" },
             { "data": "purchaseCost", "width": "15%" },
             {
@@ -25,11 +33,24 @@ function loadDataTable() {
 
                     return '<div class="w-75 btn-group" role = "group">'
                         + '<a href="/Products/Upsert?Id=' + data + '" class="btn btn-primary mx-2" > <i class="bi bi-pencil-square"></i> Edit</a >' +
-                        '<a onClick="Delete(' + data + ')" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a></div > '
+                        '<a onClick="Delete(' + data + ')" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a></div >' +
+                        '<img src="/Products/GenerateBarcode?productId='+data+'" width="100%" height="50px"/>';
                 },
                 "width": "15%"
             },
         ]
+
+        //createdRow: function (row, data, index) {
+        //    debugger;
+        //    $.ajax({
+        //        url: "/Products/GenerateBarcode",
+        //        success: function (data) {
+        //            debugger;
+        //            $('td', row).eq(0).find("img").attr("src",data);
+
+        //        }
+        //    })
+        //},
     });
 }
 

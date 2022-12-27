@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using BarcodeLib;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using POS.DAL.Repository;
 using POS.DAL.Repository.IRpository;
 using POS.Models.AppVM;
 using POS.Models.EntityModel;
-
+using System.Drawing;
 using System.Text;
 
 namespace POS.UI.Controllers
@@ -128,6 +130,8 @@ namespace POS.UI.Controllers
                 if (obj.Product.Id == 0)
                 {
 
+                
+                    
                     _unitOfWork.Product.Add(model);
                     _unitOfWork.Save();
                     TempData["success"] = "Unit Created Succesfully!";
@@ -148,7 +152,28 @@ namespace POS.UI.Controllers
             return View(obj);
         }
 
+        public IActionResult GenerateBarcode(int productId)
+        {
+            var productcode = _unitOfWork.Product.GetFirstOrDefault(f => f.Id == productId).Code;
+            Barcode barcode = new Barcode();
+            var text = productcode;
+            Image barcodeImg = barcode.Encode(TYPE.CODE128, text, Color.Black, Color.White, 250, 100);
+            var data = ConvertImageToBytes(barcodeImg);
+              var file = File(data, "image/jpeg");
+            return file;
+        }
       
+
+         private byte[] ConvertImageToBytes(Image barcodeImg)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                barcodeImg.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                return ms.ToArray();
+
+              
+            }
+        }
 
 
         //API CALLS
@@ -156,9 +181,16 @@ namespace POS.UI.Controllers
 
         [HttpGet]
         public IActionResult GetAll()
+        
         {
 
                 var itemVm = _unitOfWork.Product.GetAll();
+                foreach(var item in itemVm)
+                {
+                    item.Category = _unitOfWork.Category.GetFirstOrDefault(f => f.Id == item.CategoryId);
+                    item.Brand = _unitOfWork.Brand.GetFirstOrDefault(f => f.Id == item.BrandId);
+                    item.Unit = _unitOfWork.Unit.GetFirstOrDefault(f => f.Id == item.UnitId);
+                }
                 return Json(new { data = itemVm });
             
         }

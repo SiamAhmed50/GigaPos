@@ -47,7 +47,10 @@ namespace POS.Models.EntityModel
         [ValidateNever]
         public string? ImageUrl { get; set; }
 
-
+        [ValidateNever]
+        public string? BarcodeUrl { get; set; }
+        [ValidateNever]
+        public string? QrCodeUrl { get; set; }
 
 
         [ForeignKey("CategoryId")]

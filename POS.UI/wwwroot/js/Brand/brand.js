@@ -17,6 +17,7 @@ function loadDataTable() {
                 "render": function (data, type, full, meta) {
 
                     return '<img src="'+data+'" width="40%" height="50px"/>'
+                    
                 }
             },
             {
@@ -37,11 +38,14 @@ function loadDataTable() {
                 }
             },
 
-        ]
+        ],
+
+        
 
     });
 }
 
+ 
 function Delete(id) {
     debugger;
     Swal.fire({

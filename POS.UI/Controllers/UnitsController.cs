@@ -56,7 +56,10 @@ namespace POS.UI.Controllers
         //[ValidateAntiForgeryToken]
         public IActionResult Upsert(UnitVM model)
         {
-            if (!string.IsNullOrWhiteSpace(model.Unit.Name))
+
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+
+            if (ModelState.IsValid)
             {
                 try
                 {

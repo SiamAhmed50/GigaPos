@@ -44,10 +44,14 @@ function loadDataTable() {
                 "data": "id",
                 "width": "40%",
                 "render": function (data, type, full, meta) {
-                    return '<div class=" btn-group" role = "group">'
-                        + '<a href="/Categories/Edit?Id=' + data + '" class="btn btn-primary mx-2" > <i class="bi bi-pencil-square"></i> Edit</a >' +
-                        '<a onClick="Delete(' + data + ')" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a></div > '
+                    return '<div class="dropdown">'
+                        + '<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-gears"></i></button>'
+                        + '<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">'
+                        + '<li><a  href="/Customers/Upsert?Id=' + data + '" class="dropdown-item btn btn-primary"><i class="bi bi-pencil-square"></i> Edit </a></li>'
+                        + '<li><a class="dropdown-item" onClick="Delete(' + data + ')" <i class="bi bi-trash-fill"></i> Delete</a></li> </ul> </div>';
+
                 }
+               
             },
 
         ]

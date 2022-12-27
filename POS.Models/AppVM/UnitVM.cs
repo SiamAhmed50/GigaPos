@@ -12,6 +12,6 @@ namespace POS.Models.AppVM
     {
         public Unit Unit { get; set; }
         [ValidateNever]
-        public IEnumerable<SelectListItem> UnitList { get; set; }
+        public IEnumerable<SelectListItem>? UnitList { get; set; }
     }
 }
