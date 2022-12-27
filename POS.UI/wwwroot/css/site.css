@@ -29,3 +29,26 @@ span.brand-text.font-weight-light {
     
     color: #fff;
 }
+.input-group-addon {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    background-color: #f9fafb;
+    border-color: #ebebeb;
+    color: #929daf;
+    line-height: 1.5;
+    font-weight: 300;
+    border-radius: 2px;
+    padding: 5px 12px;
+    font-size: 14px;
+    line-height: inherit;
+}
+.category-list ul  {
+    padding:0;
+}
+.category-list ul li {
+    padding: 2px 0;
+}
