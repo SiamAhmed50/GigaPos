@@ -52,3 +52,33 @@ span.brand-text.font-weight-light {
 .category-list ul li {
     padding: 2px 0;
 }
+.getViewProduct {
+    display: inline-block;
+}
+.action-button {
+    display: inline-block;
+}
+.product-modal-image {
+    height: 120px;
+    width: 100px;
+    border: 1px solid;
+}
+.barcode-box {
+    display: inline-block
+}
+.bar-codeImage {
+    width: 150px;
+    height: 80px;
+    
+}
+.bar-image {
+   
+    display: block;
+    margin: auto;
+    width: 30%;
+}
+.custom-modalBody {
+    margin: auto;
+    width: 32%;
+   
+}

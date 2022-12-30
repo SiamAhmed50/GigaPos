@@ -1,5 +1,6 @@
 ﻿
 using BarcodeLib;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -7,8 +8,9 @@ using POS.DAL.Repository;
 using POS.DAL.Repository.IRpository;
 using POS.Models.AppVM;
 using POS.Models.EntityModel;
-using System.Drawing;
 using System.Text;
+using System.Drawing;
+using static iTextSharp.text.pdf.AcroFields;
 
 namespace POS.UI.Controllers
 {
@@ -157,7 +159,7 @@ namespace POS.UI.Controllers
             var productcode = _unitOfWork.Product.GetFirstOrDefault(f => f.Id == productId).Code;
             Barcode barcode = new Barcode();
             var text = productcode;
-            Image barcodeImg = barcode.Encode(TYPE.CODE128, text, Color.Black, Color.White, 250, 100);
+            Image barcodeImg = barcode.Encode(BarcodeLib.TYPE.CODE128, text, Color.Black, Color.White, 250, 100);
             var data = ConvertImageToBytes(barcodeImg);
               var file = File(data, "image/jpeg");
             return file;
@@ -192,7 +194,18 @@ namespace POS.UI.Controllers
                 }
                 return Json(new { data = itemVm }); 
         }
-       
+        [HttpGet]
+        public IActionResult GetById(int id)
+
+        {
+
+            var itemVm = _unitOfWork.Product.GetFirstOrDefault(x=>x.Id==id);
+            itemVm.Category = _unitOfWork.Category.GetFirstOrDefault(f => f.Id == id);
+            itemVm.Brand = _unitOfWork.Brand.GetFirstOrDefault(f => f.Id == id);
+             return Json(new { data = itemVm });
+
+        }
+
         [HttpDelete]
         public IActionResult Delete(int? id)
         {

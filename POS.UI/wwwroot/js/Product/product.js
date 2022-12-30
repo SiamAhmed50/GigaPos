@@ -17,51 +17,45 @@ function loadDataTable() {
                 "data": "imageUrl",
                 "render": function (data, type, full, meta) {
 
-                    return '<img src="'+data+'" width="100%" height="50px"/>'
+                    return '<img src="'+data+'" width="50%" height="30px"/>'
                 }
             },
-            { "data": "code", "width": "15%" },
-            { "data": "name", "width": "15%" },
-            { "data": "category.name", "width": "15%" },
-            {
-                 
-                "render": function (data, type, full, meta) {
-                    var brand = full['brand'];
-                    if (brand != null) {
-                        return '' + brand.name + '';
-                    }
-                    else {
-                        return '';
-                    }
-                     
-                }
-            },
-            { "data": "salePrice", "width": "15%" },
-            { "data": "purchaseCost", "width": "15%" },
+            { "data": "code", "width": "10%" },
+            { "data": "name", "width": "10%" },
+            { "data": "category.name", "width": "10%" },
+            { "data": "brand.name", "width": "15%" },
+          
+            { "data": "salePrice", "width": "10%" },
+            { "data": "purchaseCost", "width": "10%" },
             {
                 "data": "id",
                 "render": function (data) {
 
-                    return '<div class="w-75 btn-group" role = "group">'
-                        + '<a href="/Products/Upsert?Id=' + data + '" class="btn btn-primary mx-2" > <i class="bi bi-pencil-square"></i> Edit</a >' +
-                        '<a onClick="Delete(' + data + ')" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a></div >' +
-                        '<img src="/Products/GenerateBarcode?productId='+data+'" width="100%" height="50px"/>';
+                    return '<div class="button-group">'
+                        + '<div class="getViewProduct">'
+                        + '  <buttontype="button" onClick="getAllById(' + data + ')"  class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#productsDetails"><i class="fa-solid fa-eye"></i></button> </div>'
+
+                        + '<div class="dropdown action-button mx-2">'
+                        + '<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-gears"></i></button>'
+                        + '<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">'
+                        + '<li><a  href="/Products/Upsert?Id=' + data + '" class="dropdown-item btn btn-primary"><i class="bi bi-pencil-square"></i> Edit </a></li>'
+                        + '<li><a class="dropdown-item btn btn-primary" onClick="Delete(' + data + ')"><i class="bi bi-trash-fill"> </i> Delete</a> </li> </ul> </div>'
+
+                    +'<div class="barcode-box">'
+                        + '  <buttontype="button" onClick="getBarCode('+data+')"   class="btn btn-secondary btn-barCode" data-bs-toggle="modal" data-bs-target="#barCode"><i class="fa-solid fa-barcode"></i></button> </div>'
+                        
+
+                      
+                      
+
+
+                       
                 },
-                "width": "15%"
+                "width": "110%"
             },
         ]
 
-        //createdRow: function (row, data, index) {
-        //    debugger;
-        //    $.ajax({
-        //        url: "/Products/GenerateBarcode",
-        //        success: function (data) {
-        //            debugger;
-        //            $('td', row).eq(0).find("img").attr("src",data);
-
-        //        }
-        //    })
-        //},
+        
     });
 }
 
@@ -74,7 +68,7 @@ function loadDataTable() {
 
 
 function Delete(id) {
-    debugger;
+    
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -102,85 +96,89 @@ function Delete(id) {
     })
 }
 
-$(document).ready(function () {
-    debugger;
-    //Pagination JS
-    //how much items per page to show
-    var show_per_page = 4;
-    //getting the amount of elements inside pagingBox div
-    var number_of_items = $('#pagingBox').children().length;
-    //calculate the number of pages we are going to have
-    var number_of_pages = Math.ceil(number_of_items / show_per_page);
 
-    //set the value of our hidden input fields
-    $('#current_page').val(0);
-    $('#show_per_page').val(show_per_page);
- 
-    var navigation_html = '<li class="previous_link page-item " onclick="previous()" aria-label="« Previous"><span class="page-link" aria-hidden="true" >‹</span></li >';
-    var current_link = 0;
-    while (number_of_pages > current_link) {
-        
-        navigation_html += '<li class="page-item page_link" onclick="go_to_page(' + current_link + ')" aria-current="page" longdesc="' + current_link + '">'+
-            '<span class="page-link" > ' + (current_link + 1) + '</span ></li > ';
-        current_link++;
-    }
+function GetProductById(id) {
+   
+    var product = null;
+    $.ajax({
+
+        url: "/Products/GetById/" + id,
+        method: "GET",
+        type: "json",
+        async: false,
+
+        success: function (data) {
+           
+            product = data.data;
+           
+        }
+
+
+    });
     
-    navigation_html += '<li class="page-item" ><a class="page-link" href="javascript:next()" rel="next" aria-label="Next »" >›</a ></li >';
+    return product;
+}
 
-    $('#page_navigation').html(navigation_html);
+function getAllById(id) {
 
-    //add active_page class to the first page link
-    $('#page_navigation .page_link:first').addClass('active_page');
+    debugger
+    $("#tbl_productModal tbody tr").remove();  
+    $("#ProductmodalImage span img").remove();  
+    $("#staticBackdropLabel span ").remove();  
+    var product = GetProductById(id);
+   
+          
+         
+           
+            var imagediv = '<img src="' + product.imageUrl + '" class="product-modal-image"/>';
+            var title = '<span >' + product.name + ' </span>'
+            var rows = "<tr>"
+                + "<td>Code</td> "
+                + "<td class='prtoducttd'>" + product.code + "</td> </tr >"
+                + "<tr>"
+                + "<td>Category</td> "
+                + "<td class='prtoducttd'>" + product.category.name + "</td> </tr >"
+                + "<tr>"
+                + "<td>Brand</td> "
+                + "<td class='prtoducttd'>" + product.brand.name + "</td> </tr >"
+                + "<tr>"
+                + "<td> Price</td> "
+                + "<td class='prtoducttd'>" + product.salePrice + "</td> </tr >"
+                + "<tr>"
+                + "<td>Cost</td> "
+                + "<td class='prtoducttd'>" + product.purchaseCost + "</td> </tr >"
+                + "<td>Stock</td> "
+                + "<td class='prtoducttd'> </td> </tr >";
+               
+               
+            $('#tbl_productModal tbody').append(rows); 
+            $('#ProductmodalImage span ').append(imagediv); 
+            $('#staticBackdropLabel ').append(title); 
+        
+    
+    
+}
 
-    //hide all the elements inside pagingBox div
-    $('#pagingBox').children().css('display', 'none');
+function getBarCode(id) {
+   
+   
+    var item = GetProductById(id);
+   
+    $("#barCodeImage  img ").remove(); 
 
-    //and show the first n (show_per_page) elements
-    $('#pagingBox').children().slice(0, show_per_page).css('display', 'block');
+    var Barcode =
+         '<img src="/Products/GenerateBarcode?productId=' + id + '" width="100%" height="50px"/>'
 
-});
+    $('#barProductCode').text(item.code);
+    $('#barProductTitle').text(item.name);
+    $('#barProductPrice').text(item.salePrice+" Tk");
 
-
-
-//Pagination JS
-
-function previous() {
-
-    new_page = parseInt($('#current_page').val()) - 1;
-    //if there is an item before the current active link run the function
-    if ($('.active_page').prev('.page_link').length == true) {
-        go_to_page(new_page);
-    }
+    $('#barCodeImage  ').append(Barcode);
 
 }
 
-function next() {
-    new_page = parseInt($('#current_page').val()) + 1;
-    //if there is an item after the current active link run the function
-    if ($('.active_page').next('.page_link').length == true) {
-        go_to_page(new_page);
-    }
-
+function barCodePrint() {
+    debugger
+    $("#printbarcode").printThis();
+   /* $("#printbarcode").print();*/
 }
-function go_to_page(page_num) {
-    debugger;
-    //get the number of items shown per page
-    var show_per_page = parseInt($('#show_per_page').val());
-
-    //get the element number where to start the slice from
-    start_from = page_num * show_per_page;
-
-    //get the element number where to end the slice
-    end_on = start_from + show_per_page;
-
-    //hide all children elements of pagingBox div, get specific items and show them
-    $('#pagingBox').children().css('display', 'none').slice(start_from, end_on).css('display', 'block');
-
-    /*get the page link that has longdesc attribute of the current page and add active_page class to it
-    and remove that class from previously active page link*/
-    $('.page_link[longdesc=' + page_num + ']').addClass('active_page').siblings('.active_page').removeClass('active_page');
-
-    //update the current page input field
-    $('#current_page').val(page_num);
-}
- 
