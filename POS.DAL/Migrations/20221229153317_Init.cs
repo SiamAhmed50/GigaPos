@@ -102,6 +102,70 @@ namespace POS.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PurchasePayments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PurchaseId = table.Column<int>(type: "int", nullable: true),
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TransactionAccount = table.Column<int>(type: "int", nullable: true),
+                    PaymentAmount = table.Column<double>(type: "float", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PurchasePayments", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sales",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SalesDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    Discount = table.Column<double>(type: "float", nullable: true),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TransactionAccount = table.Column<int>(type: "int", nullable: true),
+                    PaymentStatus = table.Column<int>(type: "int", nullable: true),
+                    Paid = table.Column<double>(type: "float", nullable: false),
+                    GrandTotal = table.Column<double>(type: "float", nullable: true),
+                    Receivable = table.Column<double>(type: "float", nullable: true),
+                    Due = table.Column<double>(type: "float", nullable: true),
+                    PurchaseCost = table.Column<double>(type: "float", nullable: true),
+                    Profit = table.Column<double>(type: "float", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sales", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Suppliers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SupplierName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OpeningReceivable = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OpeningPayable = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Suppliers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Units",
                 columns: table => new
                 {
@@ -231,6 +295,31 @@ namespace POS.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SalesItem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SalesId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: true),
+                    SubTotal = table.Column<double>(type: "float", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SalesItem", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SalesItem_Sales_SalesId",
+                        column: x => x.SalesId,
+                        principalTable: "Sales",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -239,15 +328,18 @@ namespace POS.DAL.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Stock = table.Column<int>(type: "int", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    BrandId = table.Column<int>(type: "int", nullable: false),
-                    UnitId = table.Column<int>(type: "int", nullable: false),
+                    BrandId = table.Column<int>(type: "int", nullable: true),
+                    UnitId = table.Column<int>(type: "int", nullable: true),
                     SubUnitId = table.Column<int>(type: "int", nullable: true),
                     OpenningStockUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OpenningStockSubUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SalePrice = table.Column<double>(type: "float", nullable: false),
                     PurchaseCost = table.Column<double>(type: "float", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BarcodeUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    QrCodeUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -258,8 +350,7 @@ namespace POS.DAL.Migrations
                         name: "FK_Products_Brands_BrandId",
                         column: x => x.BrandId,
                         principalTable: "Brands",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
@@ -270,6 +361,63 @@ namespace POS.DAL.Migrations
                         name: "FK_Products_Units_UnitId",
                         column: x => x.UnitId,
                         principalTable: "Units",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Purchases",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    InvoiceNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PurchaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Due = table.Column<double>(type: "float", nullable: true),
+                    Paid = table.Column<double>(type: "float", nullable: false),
+                    GrandTotal = table.Column<double>(type: "float", nullable: true),
+                    TransactionAccount = table.Column<int>(type: "int", nullable: true),
+                    SupplierId = table.Column<int>(type: "int", nullable: true),
+                    ProductId = table.Column<int>(type: "int", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Purchases", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Purchases_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Purchases_Suppliers_SupplierId",
+                        column: x => x.SupplierId,
+                        principalTable: "Suppliers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PurchaseItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PurchaseId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: true),
+                    SubTotal = table.Column<double>(type: "float", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PurchaseItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PurchaseItems_Purchases_PurchaseId",
+                        column: x => x.PurchaseId,
+                        principalTable: "Purchases",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -329,6 +477,26 @@ namespace POS.DAL.Migrations
                 column: "UnitId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PurchaseItems_PurchaseId",
+                table: "PurchaseItems",
+                column: "PurchaseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Purchases_ProductId",
+                table: "Purchases",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Purchases_SupplierId",
+                table: "Purchases",
+                column: "SupplierId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SalesItem_SalesId",
+                table: "SalesItem",
+                column: "SalesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Units_RelatedUnitId",
                 table: "Units",
                 column: "RelatedUnitId");
@@ -355,13 +523,31 @@ namespace POS.DAL.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "PurchaseItems");
+
+            migrationBuilder.DropTable(
+                name: "PurchasePayments");
+
+            migrationBuilder.DropTable(
+                name: "SalesItem");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Purchases");
+
+            migrationBuilder.DropTable(
+                name: "Sales");
+
+            migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Suppliers");
 
             migrationBuilder.DropTable(
                 name: "Brands");

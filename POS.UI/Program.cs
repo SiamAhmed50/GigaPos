@@ -39,7 +39,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-  
+ 
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IDbInitializer, DbInitializer>();

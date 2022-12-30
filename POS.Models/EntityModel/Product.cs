@@ -19,6 +19,7 @@ namespace POS.Models.EntityModel
         public string? Description { get; set; }
 
         public string? Code { get; set; }
+        public int? Stock { get; set; }
 
         [Required]
         [Display(Name ="Category")]

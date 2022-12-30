@@ -180,8 +180,7 @@ namespace POS.UI.Controllers
         #region API Calles
 
         [HttpGet]
-        public IActionResult GetAll()
-        
+        public IActionResult GetAll() 
         {
 
                 var itemVm = _unitOfWork.Product.GetAll();
@@ -191,8 +190,7 @@ namespace POS.UI.Controllers
                     item.Brand = _unitOfWork.Brand.GetFirstOrDefault(f => f.Id == item.BrandId);
                     item.Unit = _unitOfWork.Unit.GetFirstOrDefault(f => f.Id == item.UnitId);
                 }
-                return Json(new { data = itemVm });
-            
+                return Json(new { data = itemVm }); 
         }
        
         [HttpDelete]

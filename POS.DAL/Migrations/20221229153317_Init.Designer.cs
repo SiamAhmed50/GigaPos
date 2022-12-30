@@ -12,8 +12,8 @@ using POS.DAL.Data;
 namespace POS.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221226090652_AddProductTable")]
-    partial class AddProductTable
+    [Migration("20221229153317_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -326,6 +326,9 @@ namespace POS.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("BarcodeUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("BrandId")
                         .HasColumnType("int");
 
@@ -360,8 +363,14 @@ namespace POS.DAL.Migrations
                     b.Property<double>("PurchaseCost")
                         .HasColumnType("float");
 
+                    b.Property<string>("QrCodeUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("SalePrice")
                         .HasColumnType("float");
+
+                    b.Property<int?>("Stock")
+                        .HasColumnType("int");
 
                     b.Property<int?>("SubUnitId")
                         .HasColumnType("int");
@@ -378,6 +387,142 @@ namespace POS.DAL.Migrations
                     b.HasIndex("UnitId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("POS.Models.EntityModel.Purchase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double?>("Due")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("GrandTotal")
+                        .HasColumnType("float");
+
+                    b.Property<string>("InvoiceNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Paid")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PurchaseDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("SupplierId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TransactionAccount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("Purchases");
+                });
+
+            modelBuilder.Entity("POS.Models.EntityModel.PurchasePayment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double?>("PaymentAmount")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime?>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("PurchaseId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TransactionAccount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PurchasePayments");
+                });
+
+            modelBuilder.Entity("POS.Models.EntityModel.Sales", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("Discount")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Due")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("GrandTotal")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Paid")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("PaymentStatus")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("Profit")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("PurchaseCost")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Receivable")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("SalesDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("TransactionAccount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sales");
                 });
 
             modelBuilder.Entity("POS.Models.EntityModel.Supplier", b =>
@@ -454,6 +599,78 @@ namespace POS.DAL.Migrations
                     b.ToTable("Units");
                 });
 
+            modelBuilder.Entity("POS.Models.PurchaseItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PurchaseId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("SubTotal")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PurchaseId");
+
+                    b.ToTable("PurchaseItems");
+                });
+
+            modelBuilder.Entity("POS.Models.SalesItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SalesId")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("SubTotal")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SalesId");
+
+                    b.ToTable("SalesItem");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -528,6 +745,21 @@ namespace POS.DAL.Migrations
                     b.Navigation("Unit");
                 });
 
+            modelBuilder.Entity("POS.Models.EntityModel.Purchase", b =>
+                {
+                    b.HasOne("POS.Models.EntityModel.Product", "Products")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("POS.Models.EntityModel.Supplier", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId");
+
+                    b.Navigation("Products");
+
+                    b.Navigation("Supplier");
+                });
+
             modelBuilder.Entity("POS.Models.EntityModel.Unit", b =>
                 {
                     b.HasOne("POS.Models.EntityModel.Unit", "RelatedUnit")
@@ -535,6 +767,28 @@ namespace POS.DAL.Migrations
                         .HasForeignKey("RelatedUnitId");
 
                     b.Navigation("RelatedUnit");
+                });
+
+            modelBuilder.Entity("POS.Models.PurchaseItem", b =>
+                {
+                    b.HasOne("POS.Models.EntityModel.Purchase", "Sales")
+                        .WithMany()
+                        .HasForeignKey("PurchaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sales");
+                });
+
+            modelBuilder.Entity("POS.Models.SalesItem", b =>
+                {
+                    b.HasOne("POS.Models.EntityModel.Sales", "Sales")
+                        .WithMany()
+                        .HasForeignKey("SalesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sales");
                 });
 #pragma warning restore 612, 618
         }
