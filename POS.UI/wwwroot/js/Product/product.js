@@ -3,6 +3,7 @@ let dataTable;
 $(document).ready(function () {
 
     loadDataTable();
+   
 });
 
 function loadDataTable() {
@@ -33,16 +34,16 @@ function loadDataTable() {
 
                     return '<div class="button-group">'
                         + '<div class="getViewProduct">'
-                        + '  <buttontype="button" onClick="getAllById(' + data + ')"  class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#productsDetails"><i class="fa-solid fa-eye"></i></button> </div>'
+                        + '  <buttontype="button" onClick="getproductDetails(' + data + ')"  class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#productsDetails"><i class="fa-solid fa-eye"></i></button> </div>'
 
                         + '<div class="dropdown action-button mx-2">'
-                        + '<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-gears"></i></button>'
+                        + '<button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-gears"></i> Manage</button>'
                         + '<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">'
                         + '<li><a  href="/Products/Upsert?Id=' + data + '" class="dropdown-item btn btn-primary"><i class="bi bi-pencil-square"></i> Edit </a></li>'
                         + '<li><a class="dropdown-item btn btn-primary" onClick="Delete(' + data + ')"><i class="bi bi-trash-fill"> </i> Delete</a> </li> </ul> </div>'
 
                     +'<div class="barcode-box">'
-                        + '  <buttontype="button" onClick="getBarCode('+data+')"   class="btn btn-secondary btn-barCode" data-bs-toggle="modal" data-bs-target="#barCode"><i class="fa-solid fa-barcode"></i></button> </div>'
+                        + '  <buttontype="button" onClick="getBarCode(' + data +')"   class="btn btn-secondary  btn-sm btn-barCode" data-bs-toggle="modal" data-bs-target="#barCode"><i class="fa-solid fa-barcode"></i></button> </div>'
                         
 
                       
@@ -119,7 +120,7 @@ function GetProductById(id) {
     return product;
 }
 
-function getAllById(id) {
+function getproductDetails(id) {
 
     debugger
     $("#tbl_productModal tbody tr").remove();  
@@ -177,8 +178,16 @@ function getBarCode(id) {
 
 }
 
-function barCodePrint() {
-    debugger
-    $("#printbarcode").printThis();
-   /* $("#printbarcode").print();*/
+function printBarCode(elem) {
+    var mywindow = window.open();
+    var content = document.getElementById(elem).innerHTML;
+    var realContent = document.body.innerHTML;
+    mywindow.document.write(content);
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+    mywindow.print();
+    document.body.innerHTML = realContent;
+    mywindow.close();
+    return true;
 }
+

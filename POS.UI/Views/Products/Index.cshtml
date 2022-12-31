@@ -7,18 +7,65 @@
     <div class="row pt-4">
         <div class="col-md-6">
             <h2>Manage Product</h2>
+            <hr />
         </div>
         <div class="col-md-6">
             <p class="text-end">
  
-                <a asp-action="Upsert" asp-controller="Products" class="btn btn-primary btn-sm"> <i class="fa-solid fa-square-plus"></i> &nbsp; Create New Products</a>
+                <a asp-action="Upsert" asp-controller="Products" class="btn btn-info btn-sm"> <i class="fa-solid fa-square-plus"></i> &nbsp; Create New Products</a>
             </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-body mb-2">
+        <form action="">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <input type="text" name="code" class="form-control" placeholder="Product Code" value="">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" name="name" placeholder="Product Name" value="">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <div class="form-group">
+                      <select class="form-control" asp-items="ViewBag.CategoryList">
+
+                    <option value="">Select Category</option></select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                  
+                                <select class="form-control" asp-items="ViewBag.BrandList">
+
+                                    <option value="">Select Brand</option>
+                                </select>
+                      
+                </div>
+
+
+            </div>
+            <div class="form-row mt-2">
+                <div class="form-group float-right">
+                    <button class="btn btn-success btn-sm" type="submit">
+                            <i class="fa fa-sliders"></i>
+                            Filter
+                    </button>
+                    <a href="https://pos.softghor.com/back/product" class="btn btn-info btn-sm">Reset</a>
+                </div>
+            </div>
+        </form>
+    </div>
         </div>
     </div>
     <br />
     <br />
-    <table id="productTBL" class="table table-bordered table-striped" style="width:100%">
-        <thead class="bg-primary text-light">
+    <table id="productTBL" class="table table-bordered table-striped table-sm" style="width:100%">
+        <thead class="bg-info text-light">
             <tr>
             
                 <th>Image</th>
@@ -95,7 +142,7 @@
                 </div>
       <div class="modal-footer">
 
-                    <button onclick="barCodePrint()" type="button" class="btn btn-success"><i class="fa-solid fa-print"></i> Print</button>
+                    <button onclick="printBarCode('printbarcode')" type="button" class="btn btn-success"><i class="fa-solid fa-print"></i> Print</button>
          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>

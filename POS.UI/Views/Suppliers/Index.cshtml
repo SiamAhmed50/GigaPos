@@ -8,20 +8,50 @@
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Supplier List</h2>
+            <h2 class="text-dark">Supplier List</h2>
         </div>
         <div class="col-6 text-right">
-            <a asp-controller="Suppliers" asp-action="Upsert" class="btn-primary btn">
-                <i class="fa-solid fa-square-plus"></i> &nbsp; New Supplier
+            <a asp-controller="Suppliers" asp-action="Upsert" class="btn-info btn btn-sm">
+                <i class="fa-solid fa-square-plus"></i> &nbsp; Create New Supplier
             </a>
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-body mb-2">
+            <form action="">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <input type="text" name="name" class="form-control" placeholder="Name" value="">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <input type="text" class="form-control" name="number" placeholder="Mobile Number" value="">
+                    </div>
+
+
+
+
+                </div>
+                <div class="form-row mt-2">
+                    <div class="form-group float-right">
+                        <button class="btn btn-success btn-sm" type="submit">
+                            <i class="fa fa-sliders"></i>
+                            Filter
+                        </button>
+                        <a href="https://pos.softghor.com/back/product" class="btn btn-info btn-sm">Reset</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <br>
-<table class="table table-bordered table-striped" style="width:100%" id="SupplierTbl">
-    <thead>
+<table class="table table-bordered table-striped table-sm" style="width:100%" id="SupplierTbl">
+    <thead class="bg-info">
         <tr>
-           
+          
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
@@ -31,6 +61,7 @@
             <th>Purchase Due</th>
             <th>Wallet Balance</th>
             <th>Total Due</th>
+            <th>Action</th>
             
         </tr>
     </thead>
