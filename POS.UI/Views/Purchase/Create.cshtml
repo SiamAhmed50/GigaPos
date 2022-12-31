@@ -21,9 +21,7 @@
                     <hr class="height:3px">
                       <form class="" asp-action="Create" method="post">
                                 
-                     <div class="row">
-                        
-                           
+                     <div class="row"> 
                                   <div class="mb-3 col-md-6">
                                             <label>Supplier</label>
                                           <select class="form-control basic-select2" name="Purchase.SupplierId"  asp-items="@Model.SupplierList" id="SupplierList">
@@ -41,11 +39,7 @@
                                                 <option selected value="">Select Product</option>
                                             </select> 
                                 </div>
-                                   
-
-                              
-                  
-                        
+                                    
                             </div>
                             <hr class="height:3px">
                             <div class="row">
@@ -80,7 +74,7 @@
       </div>
       <div class="form-row">
         <div class="form-group col-md-12 mt-4">
-          <button type="submit" id="payment_btn" class="btn btn-primary mx-auto">
+          <button type="button" class="btn btn-primary mx-auto">
             <i class="fa fa-money"></i>
             Payment
           </button>
