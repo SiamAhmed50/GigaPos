@@ -12,37 +12,57 @@ function loadDataTable() {
         },
         "columns": [
      
-            { "data": "name", "width": "30%" },
-            { "data": "email", "width": "30%" },
-            { "data": "phone", "width": "30%" },
-            { "data": "address", "width": "30%" },
-            { "data": "openingReceivable", "width": "30%" },
-            { "data": "openingPayable", "width": "30%" },
+            { "data": "name"   },
+            { "data": "email"  },
+            { "data": "phone" },
+            { "data": "address" },
             {
-                "data": "",
-                "width": "30%",
+                
+                
                 "render": function (data, type, full, meta) {
-                    return ' ';
+                    return '0 Tk';
+                }
+            },
+            {
+
+                
+                "render": function (data, type, full, meta) {
+                    return '0 Tk';
+                }
+            },
+            {
+
+                
+                "render": function (data, type, full, meta) {
+                    return '0 Tk';
                 }
             },
             {
                 "data": "",
-                "width": "30%",
+               
                 "render": function (data, type, full, meta) {
-                    return ' ';
+                    debugger;
+                    var walletBallance = parseFloat(full['openingPayable']) - parseFloat(full['openingReceivable']);
+                    if (isNaN(walletBallance)) {
+                        return '<span class="text-bold"> 0 TK </span>';
+                    }
+                    else {
+                        return '<span class="text-bold"> ' + walletBallance + 'TK </span> ** কাস্টমারের কাছে আপনার পাওনা রয়েছে';
+
+                    }
                 }
             },
             {
-                "data": "",
-                "width": "30%",
+
+
                 "render": function (data, type, full, meta) {
-                    return ' ';
+                    return '0 Tk';
                 }
             },
 
             {
                 "data": "id",
-                "width": "40%",
+               
                 "render": function (data, type, full, meta) {
                     return '<div class="dropdown">'
                         + '<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-gears"></i></button>'

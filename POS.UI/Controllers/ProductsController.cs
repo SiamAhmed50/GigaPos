@@ -10,7 +10,7 @@ using POS.Models.AppVM;
 using POS.Models.EntityModel;
 using System.Text;
 using System.Drawing;
-using static iTextSharp.text.pdf.AcroFields;
+
 
 namespace POS.UI.Controllers
 {

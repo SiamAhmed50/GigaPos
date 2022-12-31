@@ -23,7 +23,19 @@ function loadDataTable() {
             { "data": "code", "width": "10%" },
             { "data": "name", "width": "10%" },
             { "data": "category.name", "width": "10%" },
-            { "data": "brand.name", "width": "15%" },
+            {
+
+                "render": function (data, type, full, meta) {
+                    var brand = full['brand'];
+                    if (brand != null) {
+                        return '' + brand.name + '';
+                    }
+                    else {
+                        return '';
+                    }
+
+                }
+            },
           
             { "data": "salePrice", "width": "10%" },
             { "data": "purchaseCost", "width": "10%" },
@@ -182,3 +194,4 @@ function barCodePrint() {
     $("#printbarcode").printThis();
    /* $("#printbarcode").print();*/
 }
+
