@@ -13,6 +13,7 @@ namespace POS.Models.AppVM
     public class PurchaseVM
     {
         public Purchase Purchase { get; set; }
+        public Supplier Supplier { get; set; }
 
         [ValidateNever]
         public IEnumerable<SelectListItem>? SupplierList { get; set; }
@@ -20,5 +21,6 @@ namespace POS.Models.AppVM
         [ValidateNever]
 
         public IEnumerable<SelectListItem>? ProductList { get; set; }
+      
     }
 }
