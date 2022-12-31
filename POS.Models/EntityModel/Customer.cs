@@ -13,9 +13,9 @@ namespace POS.Models.EntityModel
         [Required]
         [Display(Name = "Customer Name")]
         public string Name { get; set; }
-        [Required]
+      
         [EmailAddress]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         public string? Address { get; set; }
 

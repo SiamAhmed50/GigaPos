@@ -85,7 +85,7 @@ namespace POS.UI.Controllers
                     return View(productVM);
                 
             }
-            return View();
+          
         }
 
 

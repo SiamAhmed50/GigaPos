@@ -20,5 +20,9 @@ namespace POS.Models
         [ValidateNever]
         public Purchase? Sales { get; set; }
 
+        [ForeignKey("ProductId")]
+        [ValidateNever]
+        public Product? Product { get; set; }
+
     }
 }
