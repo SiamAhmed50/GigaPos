@@ -12,40 +12,60 @@ function loadDataTable() {
         },
         "columns": [
      
-            { "data": "name", "width": "20%" },
-            { "data": "email", "width": "20%" },
-            { "data": "phone", "width": "20%" },
-            { "data": "address", "width": "20%" },
-            { "data": "openingReceivable", "width": "20%" },
-            { "data": "openingPayable", "width": "20%" },
+            { "data": "name"   },
+            { "data": "email"  },
+            { "data": "phone" },
+            { "data": "address" },
             {
-                "data": "",
-                "width": "30%",
+                
+                
                 "render": function (data, type, full, meta) {
-                    return ' ';
+                    return '0 Tk';
+                }
+            },
+            {
+
+                
+                "render": function (data, type, full, meta) {
+                    return '0 Tk';
+                }
+            },
+            {
+
+                
+                "render": function (data, type, full, meta) {
+                    return '0 Tk';
                 }
             },
             {
                 "data": "",
-                "width": "30%",
+               
                 "render": function (data, type, full, meta) {
-                    return ' ';
+                    debugger;
+                    var walletBallance = parseFloat(full['openingPayable']) - parseFloat(full['openingReceivable']);
+                    if (isNaN(walletBallance)) {
+                        return '<span class="text-bold"> 0 TK </span>';
+                    }
+                    else {
+                        return '<span class="text-bold"> ' + walletBallance + 'TK </span> ** কাস্টমারের কাছে আপনার পাওনা রয়েছে';
+
+                    }
                 }
             },
             {
-                "data": "",
-                "width": "30%",
+
+
                 "render": function (data, type, full, meta) {
-                    return ' ';
+                    return '0 Tk';
                 }
             },
 
             {
                 "data": "id",
-                "width": "40%",
+               
                 "render": function (data, type, full, meta) {
                     return '<div class="dropdown">'
-                        + '<button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-gears"></i></button>'
+                        + '<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-gears"></i></button>'
                         + '<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">'
                         + '<li><a  href="/Customers/Upsert?Id=' + data + '" class="dropdown-item btn btn-primary"><i class="bi bi-pencil-square"></i> Edit </a></li>'
                         + '<li><a class="dropdown-item btn btn-primary" onClick="Delete(' + data + ')"><i class="bi bi-trash-fill"> </i> Delete</a> </li> </ul> </div>';

@@ -12,9 +12,9 @@ namespace POS.Models.EntityModel
         [Required]
         [Display(Name = "Supplier Name")]
         public string SupplierName { get; set; }
-        [Required]
+    
         [EmailAddress]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         public string? Address { get; set; }
 

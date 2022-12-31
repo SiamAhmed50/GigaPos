@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using POS.DAL.Data;
 
@@ -11,9 +12,10 @@ using POS.DAL.Data;
 namespace POS.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221230060017_BrandDescNull")]
+    partial class BrandDescNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -290,6 +292,7 @@ namespace POS.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifiedDate")
@@ -536,6 +539,7 @@ namespace POS.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifiedDate")
@@ -767,7 +771,7 @@ namespace POS.DAL.Migrations
             modelBuilder.Entity("POS.Models.PurchaseItem", b =>
                 {
                     b.HasOne("POS.Models.EntityModel.Purchase", "Sales")
-                        .WithMany("PurchaseItems")
+                        .WithMany()
                         .HasForeignKey("PurchaseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -784,11 +788,6 @@ namespace POS.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Sales");
-                });
-
-            modelBuilder.Entity("POS.Models.EntityModel.Purchase", b =>
-                {
-                    b.Navigation("PurchaseItems");
                 });
 #pragma warning restore 612, 618
         }

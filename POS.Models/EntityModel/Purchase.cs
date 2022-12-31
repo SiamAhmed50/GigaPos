@@ -22,7 +22,7 @@ namespace POS.Models.EntityModel
          
         public int? SupplierId { get; set; }
 
-        public int? ProductId { get; set; }
+     
 
 
 
@@ -33,10 +33,10 @@ namespace POS.Models.EntityModel
         [ValidateNever]
         public Supplier? Supplier { get; set; }
 
+ 
 
-        [ForeignKey("ProductId")]
+
         [ValidateNever]
-        public Product? Products { get; set; }
-
+        public List<PurchaseItem>? PurchaseItems { get; set; }
     }
 }

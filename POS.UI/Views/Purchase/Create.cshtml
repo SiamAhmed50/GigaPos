@@ -1,0 +1,108 @@
+﻿@model PurchaseVM
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+ <h1>Purchase</h1>
+<div class="p-3 bg-white">
+    <div class="row">
+        <div class="col-md-12 ">
+           
+         
+                <div class="border mt-4 p-3">
+                    <div class="row pb-2">
+                        <div class="col-md-12">
+                            <h4 class="card-title" style="display: inline-block">Create Purchase</h4>
+                            <a href="https://pos.softghor.com/back/purchase/add_supplier" class="edit btn btn-outline btn-primary float-right mt-2" data-toggle="modal" data-target="#edit" id="Add Supplier" style="margin-left: 30px;">Add Supplier</a>
+                        </div>
+                      
+                    </div>
+                    <hr class="height:3px">
+                      <form class="" asp-action="Create" method="post">
+                                
+                     <div class="row">
+                        
+                           
+                                  <div class="mb-3 col-md-6">
+                                            <label>Supplier</label>
+                                          <select class="form-control basic-select2" name="Purchase.SupplierId"  asp-items="@Model.SupplierList" id="SupplierList">
+                                             <option selected value="">Select Supplier</option>
+                                            </select> 
+                                </div>
+                                 <div class="mb-3 col-md-6">
+                                    <label>Purchase Date</label> 
+                                    <input type="date" class="form-control custom-datepicker" name="Purchase.PurchaseDate" />
+
+                                </div>
+                                  <div class="mb-3 col-md-6">
+                                       <label>Product</label>
+                                          <select class="form-control basic-select2" asp-items="@Model.ProductList" id="ProductList">
+                                                <option selected value="">Select Product</option>
+                                            </select> 
+                                </div>
+                                   
+
+                              
+                  
+                        
+                            </div>
+                            <hr class="height:3px">
+                            <div class="row">
+        <table class="table table-bordered" id="purchaseProduct">
+          <thead>
+            <tr class="bg-primary">
+              <th style="width:80px">#SL</th>
+              <th>Product</th>
+              <th>Rate</th>
+              <th style="width:320px;">Qty</th>
+              <th>Sub Total</th>
+              <th style="width:50px">
+                <i class="fa fa-trash"></i>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="table_body">
+
+          
+            
+        </tbody>
+          <tfoot class="bg-light">
+            <tr>
+              <td colspan="4"></td>
+              
+              <td colspan="2">
+                <strong>Grand Total: <span id="grandTotalTxt">0</span> Tk <input type="hidden" value="0" name="Purchase.GrandTotal" id="PurchaseGrandTotal"  /> </strong>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12 mt-4">
+          <button type="submit" id="payment_btn" class="btn btn-primary mx-auto">
+            <i class="fa fa-money"></i>
+            Payment
+          </button>
+        </div>
+      </div>
+
+
+                                </form>
+                               
+                </div>
+                
+        </div>
+    </div>
+
+</div>
+
+@section Scripts
+    {
+  
+    @{
+        <partial name="_ValidationScriptsPartial.cshtml" />
+      
+    }
+    <script src="~/js/Purchase/purchaseCreate.js"></script>
+}
