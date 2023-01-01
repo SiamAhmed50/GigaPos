@@ -13,19 +13,47 @@ function loadDataTable() {
         },
         "columns": [
            
-            { "data": "supplierName", "width": "30%" },
-            { "data": "email", "width": "30%" },
-            { "data": "phone", "width": "30%" },
-            { "data": "address", "width": "30%" },
-            { "data": "openingReceivable", "width": "30%" },
-            { "data": "openingPayable", "width": "30%" },
-            { "data": "", "width": "30%" },
-            { "data": "", "width": "30%" },
-            { "data": "", "width": "30%" },
+            { "data": "supplierName" },
+            { "data": "email" },
+            { "data": "phone" },
+            { "data": "address" },
+
+            {
+                "render": function (data, type, full, meta) {
+                    return '0 Tk';
+                }
+            },
+            {
+                "render": function (data, type, full, meta) {
+                    return '0 Tk';
+                }
+            },
+            {
+                "render": function (data, type, full, meta) {
+                    return '0 Tk';
+                } },
+            {
+                "data": "",
+
+                "render": function (data, type, full, meta) {
+                    debugger;
+                    var walletBallance = parseFloat(full['openingPayable']) - parseFloat(full['openingReceivable']);
+                    if (isNaN(walletBallance)) {
+                        return '<span class="text-bold"> 0 TK </span>';
+                    }
+                    else {
+                        return '<span class="text-bold"> ' + walletBallance + 'TK </span> ** কাস্টমারের কাছে আপনার পাওনা রয়েছে';
+
+                    }
+                } },
+            {
+                "render": function (data, type, full, meta) {
+                    return '0 Tk';
+                } },
            
             {
                 "data": "id",
-                "width": "40%",
+               
                 "render": function (data, type, full, meta) {
                     debugger
                     return '<div class="dropdown action-button mx-2">'

@@ -1,4 +1,6 @@
 ﻿
+
+
 var counter = 0;
 var index = 0;
 var productPrice = 0;
