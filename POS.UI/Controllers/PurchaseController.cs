@@ -98,18 +98,8 @@ namespace POS.UI.Controllers
             };
             return View(purchaseVM);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult InsertSupplier(PurchaseVM obj)
-        {
-
-            if (ModelState.IsValid)
-            {
-
-            }
-
-            return View();
-        }
+      
+      
 
     }
 }

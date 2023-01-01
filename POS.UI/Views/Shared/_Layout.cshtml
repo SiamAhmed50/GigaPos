@@ -404,7 +404,44 @@
                                 </li>
                                 
                             </ul>
+
                           </li>
+                           <li class="nav-item">
+                            <a asp-action="Index" asp-controller="Stocks" class="nav-link">
+                               <i class="nav-icon fa-solid fa-gift"></i>
+                                <p>
+                                    Stock
+
+                                </p>
+                            </a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa-solid fa-triangle-exclamation nav-icon"></i>
+                                <p>
+                                    Damages
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-action="Upsert" asp-controller="Damages" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Damage</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-action="Index" asp-controller="Damages" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Damages</p>
+                                    </a>
+                                </li>
+                               
+                                
+                            </ul>
+                        </li>
+
           <li class="nav-header">PRODUCT INFORMATION</li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">

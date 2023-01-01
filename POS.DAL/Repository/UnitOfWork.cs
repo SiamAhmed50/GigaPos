@@ -21,6 +21,7 @@ namespace POS.DAL.Repository
             Customer = new CustomerRepository(_db);
             Supplier = new SupplierRepository(_db);
             Purchase = new PurchaseRepository(_db);
+            Damage = new DamageRepository(_db);
         }
 
         public ICategoryRepository Category { get; private set; }
@@ -30,6 +31,7 @@ namespace POS.DAL.Repository
         public ICustomerRepository Customer { get; private set; }
         public ISupplierRepository Supplier { get; private set; }
         public IPurchaseRepository Purchase { get; private set; }
+        public IDamageRepository Damage { get; private set; }
       
 
         public void Save()

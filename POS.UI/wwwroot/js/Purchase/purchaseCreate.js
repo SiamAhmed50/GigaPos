@@ -5,7 +5,7 @@ var counter = 0;
 var index = 0;
 var productPrice = 0;
 $("#ProductList").on("change", function () {
-    debugger; 
+    debugger;
     var productId = $("#ProductList option:selected").val();
     var productName = $("#ProductList option:selected").text();
     counter++;
@@ -84,3 +84,36 @@ function RemoveProduct(elem) {
     row.remove();
     $("#ProductList").append(newOption);
 }
+
+function SaveSupplier() {
+
+    debugger;
+    let name = $("#supplierName").val();
+    let email = $("#supplierEmail").val();
+    let phone = $("#supplierPhone").val();
+    let address = $("#supplierAddress").val();
+    let openeingReceivable = $("#openeingReceivable").val();
+    let openeingPayable = $("#openeingPayable").val();
+
+    if ($("#supplierForm").valid()) {
+
+        var formData = $("#supplierForm").serialize();
+        $.ajax({
+            url: "/Suppliers/Upsert",
+            type: "POST",
+            data: formData,
+            success: function (response) {
+               debugger
+                location.reload(true);
+           },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+        });
+    
+
+
+    }
+}
+  
+

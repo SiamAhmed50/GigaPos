@@ -104,7 +104,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class=""  asp-action="InsertSupplier" method="post">
+                <form id="supplierForm">
                     <div >
                         
 
@@ -113,7 +113,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label asp-for="Supplier.SupplierName"></label>
-                                    <input asp-for="Supplier.SupplierName" class="form-control" />
+                                    <input asp-for="Supplier.SupplierName" id="supplierName" class="form-control" />
                                     <span asp-validation-for="Supplier.SupplierName" class="text-danger"></span>
                                 </div>
                             </div>
@@ -124,35 +124,35 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label asp-for="Supplier.Email"></label>
-                                    <input asp-for="Supplier.Email" class="form-control" />
+                                    <input asp-for="Supplier.Email" id="supplierEmail" class="form-control" />
                                     <span asp-validation-for="Supplier.Email" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label asp-for="Supplier.Address"></label>
-                                    <textarea asp-for="Supplier.Address" class="form-control"></textarea>
+                                    <textarea asp-for="Supplier.Address" id="supplierAddress" class="form-control"></textarea>
                                     <span asp-validation-for="Supplier.Address" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label asp-for="Supplier.Phone"></label>
-                                    <input asp-for="Supplier.Phone" class="form-control" />
+                                    <input asp-for="Supplier.Phone" id="supplierPhone" class="form-control" />
                                     <span asp-validation-for="Supplier.Phone" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label asp-for="Supplier.OpeningReceivable"></label>
-                                    <input asp-for="Supplier.OpeningReceivable" class="form-control" />
+                                    <input asp-for="Supplier.OpeningReceivable" id="openeingReceivable" class="form-control" />
                                     <span asp-validation-for="Supplier.OpeningReceivable" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label asp-for="Supplier.OpeningPayable"></label>
-                                    <input asp-for="Supplier.OpeningPayable" class="form-control" />
+                                    <input asp-for="Supplier.OpeningPayable" id="openeingPayable" class="form-control" />
                                     <span asp-validation-for="Supplier.OpeningPayable" class="text-danger"></span>
                                 </div>
                             </div>
@@ -168,7 +168,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-info">Submit</button>
+                <button type="submit" onclick="SaveSupplier()" class="btn btn-info">Submit</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                
             </div>

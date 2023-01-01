@@ -49,20 +49,24 @@
                                 <span asp-validation-for="Customer.Phone" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label asp-for="Customer.OpeningReceivable"></label>
-                                <input asp-for="Customer.OpeningReceivable" class="form-control" />
-                                <span asp-validation-for="Customer.OpeningReceivable" class="text-danger"></span>
+                        @if (Model.Customer.Id==0)
+                        {
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Customer.OpeningReceivable"></label>
+                                    <input asp-for="Customer.OpeningReceivable" class="form-control" />
+                                    <span asp-validation-for="Customer.OpeningReceivable" class="text-danger"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label asp-for="Customer.OpeningPayable"></label>
-                                <input asp-for="Customer.OpeningPayable" class="form-control" />
-                                <span asp-validation-for="Customer.OpeningPayable" class="text-danger"></span>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Customer.OpeningPayable"></label>
+                                    <input asp-for="Customer.OpeningPayable" class="form-control" />
+                                    <span asp-validation-for="Customer.OpeningPayable" class="text-danger"></span>
+                                </div>
                             </div>
-                        </div>
+                        }
+                       
                     </div>
 
                     <div class="mb-2 text-center unit-count" style="display:none">

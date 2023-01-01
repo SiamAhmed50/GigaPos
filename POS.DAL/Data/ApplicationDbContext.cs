@@ -27,6 +27,7 @@ namespace POS.DAL.Data
         public DbSet<PurchasePayment> PurchasePayments { get; set; }
         public DbSet<Sales> Sales { get; set; }
         public DbSet<SalesItem> SalesItem { get; set; }
+        public DbSet<Damage> Damages { get; set; }
         
         public DbSet<AppUser> AppUsers { get; set; }
     }
