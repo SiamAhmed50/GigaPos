@@ -105,6 +105,7 @@ namespace POS.UI.Controllers
             {
                 var model = new Product();
                 model = obj.Product;
+                model.Stock = 0;
                 string mmRoot = _webHost.WebRootPath;
 
 
@@ -129,24 +130,16 @@ namespace POS.UI.Controllers
                     {
                         file.CopyTo(fileStream);
                     }
-                    model.ImageUrl = @"\img\ProductImages\" + fileName + fileExtention;
-
-                }
-                //Create Product
+                    model.ImageUrl = @"\img\ProductImages\" + fileName + fileExtention; 
+                } 
                 if (obj.Product.Id == 0)
-                {
-
-                
-                    
+                { 
                     _unitOfWork.Product.Add(model);
                     _unitOfWork.Save();
                     TempData["success"] = "Unit Created Succesfully!";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index"); 
 
-
-                }
-
-                //Update Products
+                } 
                 else
                 {
                     _unitOfWork.Product.Update(model);

@@ -56,10 +56,47 @@ namespace POS.UI.Controllers
 
             if (ModelState.IsValid)
             {
+                try
+                {
+                    var purchase = new Purchase();
+                    purchase = obj.Purchase;
+                    _unitOfWork.Purchase.Add(purchase);
+                    //Update Product Stock
+                    foreach(var product in purchase.PurchaseItems)
+                    {
+                        var Product = _unitOfWork.Product.GetFirstOrDefault(f => f.Id == product.ProductId);
+                        Product.Stock += product.Quantity;
 
+                    }
+                    _unitOfWork.Save();
+                }
+                catch (Exception ex)
+                {
+                    var msg = ex.Message;
+                }
             }
-             
-            return View();
+            List<Supplier> supplierList = new List<Supplier>();
+            List<Product> productList = new List<Product>();
+
+
+            supplierList = _unitOfWork.Supplier.GetAll().ToList();
+            productList = _unitOfWork.Product.GetAll().ToList();
+
+            PurchaseVM purchaseVM = new()
+            {
+                Purchase = new(),
+                SupplierList = supplierList.Select(i => new SelectListItem
+                {
+                    Text = i.SupplierName,
+                    Value = i.Id.ToString()
+                }),
+                ProductList = productList.Select(i => new SelectListItem
+                {
+                    Text = i.Name + " - " + i.Code,
+                    Value = i.Id.ToString()
+                }),
+            };
+            return View(purchaseVM);
         }
     }
 }

@@ -14,6 +14,7 @@ namespace POS.DAL.Repository.IRpository
         public IUnitRepository Unit { get;}
         public ICustomerRepository Customer { get;}
         public ISupplierRepository Supplier { get;}
+        public IPurchaseRepository Purchase { get;}
       
         void Save();
     }

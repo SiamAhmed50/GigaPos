@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using POS.DAL.Data;
 
@@ -11,9 +12,10 @@ using POS.DAL.Data;
 namespace POS.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221231135223_Changes02")]
+    partial class Changes02
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -764,7 +766,7 @@ namespace POS.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("POS.Models.EntityModel.Purchase", "Sales")
-                        .WithMany()
+                        .WithMany("PurchaseItems")
                         .HasForeignKey("PurchaseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -783,6 +785,11 @@ namespace POS.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Sales");
+                });
+
+            modelBuilder.Entity("POS.Models.EntityModel.Purchase", b =>
+                {
+                    b.Navigation("PurchaseItems");
                 });
 #pragma warning restore 612, 618
         }

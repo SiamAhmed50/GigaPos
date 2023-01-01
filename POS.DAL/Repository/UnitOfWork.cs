@@ -20,6 +20,7 @@ namespace POS.DAL.Repository
             Unit = new UnitRepository(_db);
             Customer = new CustomerRepository(_db);
             Supplier = new SupplierRepository(_db);
+            Purchase = new PurchaseRepository(_db);
         }
 
         public ICategoryRepository Category { get; private set; }
@@ -28,6 +29,7 @@ namespace POS.DAL.Repository
         public IUnitRepository Unit { get; private set; }
         public ICustomerRepository Customer { get; private set; }
         public ISupplierRepository Supplier { get; private set; }
+        public IPurchaseRepository Purchase { get; private set; }
       
 
         public void Save()
