@@ -53,7 +53,7 @@ namespace POS.UI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(PurchaseVM obj)
         {
-
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
                 try
@@ -77,6 +77,7 @@ namespace POS.UI.Controllers
             }
             List<Supplier> supplierList = new List<Supplier>();
             List<Product> productList = new List<Product>();
+
 
 
             supplierList = _unitOfWork.Supplier.GetAll().ToList();

@@ -10,17 +10,15 @@ using System.Threading.Tasks;
 
 namespace POS.Models.AppVM
 {
-    public class PurchaseVM
+    public class PosVM
     {
-        public Purchase Purchase { get; set; }
-        public Supplier? Supplier { get; set; }
-
-        [ValidateNever]
-        public IEnumerable<SelectListItem>? SupplierList { get; set; }
-
+        public Sales Pos { get; set; }
+        
         [ValidateNever]
 
         public IEnumerable<SelectListItem>? ProductList { get; set; }
-      
+        [ValidateNever]
+        public IEnumerable<SelectListItem>? CustomerList { get; set; }
+
     }
 }

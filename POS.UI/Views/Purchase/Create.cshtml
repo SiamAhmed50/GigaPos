@@ -1,4 +1,5 @@
-﻿
+﻿@using POS.Models.Enums
+
 @model PurchaseVM
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -81,6 +82,78 @@
           </button>
         </div>
       </div>
+
+
+      
+<div class="modal fade" id="paymentForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Payment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <table class="table table-bordered text-left">
+                        <tbody>
+                            <tr>
+                                <td width="50%">
+                                    <strong class="float-left">Paying Items: </strong>
+                                    <strong class="float-right">(<span id="items"></span>)</strong>
+                                </td>
+                                <td>
+                                    <strong class="float-left">Total Payable: </strong>
+                                    <strong class="float-right">(<span id="totalPayable">0</span> Tk)</strong>
+                                    <input type="hidden"  id="totalPayable_input" value="0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <strong class="float-left pl-3">Due</strong>
+                                    <strong class="float-right pr-3">
+                                        (<span id="due_txt"></span> Tk)
+                                    </strong>
+                                    <input type="hidden" id="due_input" name="Purchase.Due" value="">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label for="note">Note</label>
+                            <textarea name="Purchase.Note" class="form-control" placeholder="Enter Note (Optional) "></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="">Transection Account</label>
+                            <select class="form-control" asp-for="Purchase.TransactionAccount" asp-items="Html.GetEnumSelectList<TransactionAccount>()">
+                                  
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="pay_amount">Pay Amount</label>
+                            <div class="input-group">
+                                <input type="number" step="any" class="form-control" name="Purchase.Paid" id="pay_amount" placeholder="Pay Amount...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-warning" type="button" onclick="SetPaidAmount()" id="paid_btn">PAID!</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-info">PURCHASE</button>
+              
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
                                 </form>
@@ -176,80 +249,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="paymentForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Payment</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-body">
-                    <table class="table table-bordered text-left">
-                        <tbody>
-                            <tr>
-                                <td width="50%">
-                                    <strong class="float-left">Paying Items: </strong>
-                                    <strong class="float-right">(<span id="items"></span>)</strong>
-                                </td>
-                                <td>
-                                    <strong class="float-left">Total Payable: </strong>
-                                    <strong class="float-right">(<span id="payable">93500</span> Tk)</strong>
-                                    <input type="hidden" name="payable" id="payable_input" value="93500">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <strong class="float-left pl-3">Due</strong>
-                                    <strong class="float-right pr-3">
-                                        (<span id="due">93500</span> Tk)
-                                    </strong>
-                                    <input type="hidden" id="due_input" name="due_amount" value="93500">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="form-row">
-                        <div class="form-group col-12">
-                            <label for="note">Note</label>
-                            <textarea name="note" class="form-control" placeholder="Enter Note (Optional) "></textarea>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="">Transection Account</label>
-                            <select name="bank_account_id" id="" class="form-control" required="">
-                                <option value="1">
-                                    CASH
-                                </option>
-                                <option value="2">
-                                    bKash
-                                </option>
-                            </select>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="pay_amount">Pay Amount</label>
-                            <div class="input-group">
-                                <input type="number" step="any" class="form-control" name="pay_amount" id="pay_amount" placeholder="Pay Amount...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-warning" type="button" id="paid_btn">PAID!</button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-info">PURCHASE</button>
-              
-
-            </div>
-        </div>
-    </div>
-</div>
 
 @section Scripts
     {

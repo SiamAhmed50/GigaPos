@@ -1,16 +1,53 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using POS.DAL.Repository.IRpository;
+using POS.Models.AppVM;
+using POS.Models.EntityModel;
 
 namespace POS.UI.Controllers
 {
     public class POSController : Controller
     {
+
+        private readonly IWebHostEnvironment _webHost;
+        private IUnitOfWork _unitOfWork;
+        public POSController(IWebHostEnvironment webHost, IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+            _webHost = webHost;
+        }
+
+
         public IActionResult Index()
         {
             return View();
         }
         public IActionResult Create()
         {
-            return View();
+           
+            List<Product> productList = new List<Product>();
+            List<Customer> customerList = new List<Customer>();
+
+            customerList = _unitOfWork.Customer.GetAll().ToList();
+            productList = _unitOfWork.Product.GetAll().ToList();
+
+            PosVM purchaseVM = new()
+            {
+                Pos = new(), 
+                ProductList = productList.Select(i => new SelectListItem
+                {
+                    Text = i.Name + " - " + i.Code,
+                    Value = i.Id.ToString()
+                }),
+
+                CustomerList = customerList.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
+            };
+
+            return View(purchaseVM);
         }
     }
 }

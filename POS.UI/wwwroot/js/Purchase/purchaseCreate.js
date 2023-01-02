@@ -5,7 +5,7 @@ var counter = 0;
 var index = 0;
 var productPrice = 0;
 $("#ProductList").on("change", function () {
-    debugger; 
+   
     var productId = $("#ProductList option:selected").val();
     var productName = $("#ProductList option:selected").text();
     counter++;
@@ -39,7 +39,7 @@ $("#ProductList").on("change", function () {
 
 
 function CalculateSubTotal() {
-    debugger;
+ 
     var rows = $("#purchaseProduct tbody tr");
     rows.each(function () {
         debugger;
@@ -55,7 +55,7 @@ function CalculateSubTotal() {
 }
 
 function CalculateGrandTotal() {
-    debugger;
+  
     var rows = $("#purchaseProduct tbody tr");
     var grandTotal = 0;
     rows.each(function () {
@@ -84,3 +84,34 @@ function RemoveProduct(elem) {
     row.remove();
     $("#ProductList").append(newOption);
 }
+
+$("#paymentForm").on("shown.bs.modal", function () {
+    debugger;
+    var grandTotal = $("#PurchaseGrandTotal").val();
+    $("#totalPayable").html(grandTotal);
+    $("#due_txt").html(grandTotal);
+    $("#totalPayable_input").val(grandTotal);
+    $("#due_input").val(grandTotal);
+
+
+})
+
+
+function SetPaidAmount() {
+    debugger
+
+    var grandTotal = $("#PurchaseGrandTotal").val();
+    $("#pay_amount").val(grandTotal);
+    $("#due_txt").html("0");
+    $("#due_input").val(0);
+}
+
+$("#pay_amount").keyup(function () {
+    debugger;
+    var grandTotal = $("#PurchaseGrandTotal").val();
+    var payAmount = $("#pay_amount").val();
+    var due = parseFloat(grandTotal - payAmount);
+    $("#due_txt").html(due);
+    $("#due_input").val(due);
+
+})
