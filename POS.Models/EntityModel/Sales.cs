@@ -27,5 +27,8 @@ namespace POS.Models.EntityModel
         public double? PurchaseCost { get; set; }
         public double? Profit { get; set; }
 
+        [ValidateNever]
+        public List<SalesItem>? SalesItems { get; set; }
+
     }
 }
