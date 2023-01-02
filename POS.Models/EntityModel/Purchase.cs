@@ -10,7 +10,7 @@ namespace POS.Models.EntityModel
 {
     public class Purchase : BaseEntity
     {
-        public string? InvoiceNo { get; set; }
+        
         public DateTime PurchaseDate { get; set; } 
         public string? Note { get; set; }
 

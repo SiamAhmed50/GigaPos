@@ -1,4 +1,4 @@
-﻿
+﻿@model PosVM
 @{
     ViewData["Title"] = "Create";
 }
@@ -38,14 +38,16 @@
 
                         <div class="mb-3">
                             <label></label>
-                            <input type="text" placeholder="Start to write product name" class="form-control" />
+                             <select class="form-control basic-select2" asp-items="@Model.ProductList" id="ProductList">
+                                        <option selected value="">Select Product</option>
+                               </select> 
 
                         </div>
 
 
                         <div class="mb-3">
                             <label></label>
-                            <input type="date" class="form-control" />
+                            <input type="date" class="form-control" name="Sales.SalesDate" />
 
                         </div>
 
@@ -53,9 +55,9 @@
 
                         <div class="mb-3">
 
-                            <select class="form-select">
-                                <option>Walk-in Customer</option>
-                            </select>
+                           <select class="form-control basic-select2" name="Purchase.SupplierId"  asp-items="@Model.CustomerList" id="CustomerList">
+                                             <option selected value="">Walk-in Customer</option>
+                                            </select> 
 
                         </div>
 
