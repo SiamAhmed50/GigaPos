@@ -1,7 +1,39 @@
-﻿
-@{
-    ViewData["Title"] = "Upsert";
+﻿@model DamageVM
+
+<form method="post">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-dark">Create Damage</h2>
+			<hr />
+		</div>
+		@*<div asp-validation-summary="All"></div>*@
+		<div class="mb-3">
+			<label asp-for="Damage.ProductId"></label>
+			<select asp-for="Damage.ProductId" class="form-control" asp-items="ViewBag.ProductList" >
+				<option value="">Select Product</option>
+			</select>
+			<span asp-validation-for="Damage.ProductId" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Damage.CreatedDate"></label>
+			<input asp-for="Damage.CreatedDate" type="date" data-provide="datepicker" data-date-today-highlight="true" data-date-format="yyyy-mm-dd" class="form-control" name="date" >
+			
+			<span asp-validation-for="Damage.CreatedDate" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Damage.Note"></label>
+			<textarea asp-for="Damage.Note" class="form-control" ></textarea>
+			<span asp-validation-for="Damage.Note" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-info" style="width:150px">Create</button>
+		<a asp-controller="Damages" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
 }
-
-<h1>Upsert</h1>
-
