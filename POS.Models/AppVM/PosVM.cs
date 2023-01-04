@@ -20,5 +20,8 @@ namespace POS.Models.AppVM
         [ValidateNever]
         public IEnumerable<SelectListItem>? CustomerList { get; set; }
 
+        [ValidateNever]
+        public IEnumerable<SelectListItem>? CategoryList { get; set; }
+
     }
 }

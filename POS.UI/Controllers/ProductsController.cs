@@ -68,6 +68,7 @@ namespace POS.UI.Controllers
                     Text = i.Name,
                     Value = i.Id.ToString()
                 }),
+
             };
 
             if (id == null || id == 0)
@@ -105,7 +106,34 @@ namespace POS.UI.Controllers
             {
                 var model = new Product();
                 model = obj.Product;
-                model.Stock = 0;
+                var relatedBy = _unitOfWork.Unit.GetFirstOrDefault(f => f.Id == model.UnitId).RelatedBy;
+                if (model.UnitId != 0)
+                {
+                    if(model.SubUnitId != 0)
+                    {
+                        if (model.OpenningStockUnit > 0)
+                        {
+                            if (model.OpenningStockSubUnit > 0)
+                            {
+                                model.Stock = model.OpenningStockUnit * relatedBy + model.OpenningStockSubUnit;
+                            }
+                            else
+                            {
+                                model.Stock = model.OpenningStockUnit * relatedBy;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (model.OpenningStockUnit > 0)
+                        {
+                            model.Stock = model.OpenningStockUnit * relatedBy;
+                        }
+                    }
+
+                 }
+              
+            
                 string mmRoot = _webHost.WebRootPath;
 
 

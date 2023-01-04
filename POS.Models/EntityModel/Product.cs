@@ -31,8 +31,8 @@ namespace POS.Models.EntityModel
         [Display(Name = "Sub Unit")]
         public int? SubUnitId { get; set; }
    
-        public string? OpenningStockUnit { get; set; }
-        public string? OpenningStockSubUnit { get; set; }
+        public int? OpenningStockUnit { get; set; }
+        public int? OpenningStockSubUnit { get; set; }
 
 
         [Required]

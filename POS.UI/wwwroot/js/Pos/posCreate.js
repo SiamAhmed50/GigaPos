@@ -2,9 +2,11 @@
 
 $(document).ready(function () {
     debugger;
+
+    getProducts();
     //Pagination JS
     //how much items per page to show
-    var show_per_page = 4;
+    var show_per_page = 9;
     //getting the amount of elements inside pagingBox div
     var number_of_items = $('#pagingBox').children().length;
     //calculate the number of pages we are going to have
@@ -35,6 +37,9 @@ $(document).ready(function () {
 
     //and show the first n (show_per_page) elements
     $('#pagingBox').children().slice(0, show_per_page).css('display', 'block');
+
+
+  
 
 });
 
@@ -80,4 +85,42 @@ function go_to_page(page_num) {
 
     //update the current page input field
     $('#current_page').val(page_num);
+}
+
+function getProducts(searchFilter, categoryId) {
+    debugger;
+
+  
+
+
+    $.ajax({
+
+        url: "/Pos/GetProducts?searchFilter=" + searchFilter + "&categoryId=" + categoryId,
+        method: "GET",
+        type: "json",
+        async: false,
+
+        success: function (data) {
+            debugger;
+            products = data.data;
+            $("#pagingBox").html("");
+            for (var i = 0; i < products.length; i++) {
+                var productDiv = '<div class="col-sm-4 col-md-4"><div class=" product text-center m-2 product" ><img src="###imgurl###" class="align-self-start img-thumbnail" alt="###productnamealt###" style="width:80px" data-pagespeed-url-hash="31082695"><br><span>###productname### - ###productcode###</span> <br> <small class="font-weight-bold">###productprice###</small> Tk<br><small class="stock">Stock : ###stock### pc</small> </div></div>';
+
+                productDiv = productDiv.replace("###imgurl###", products[i].imageUrl).replace("###productnamealt###", products[i].name).replace("###productname###", products[i].name).replace("###productcode###", products[i].code).replace("###productprice###", products[i].salePrice).replace("###stock###", products[i].stock);
+                $("#pagingBox").append(productDiv);
+            }
+
+        }
+
+
+    });
+
+}
+
+function searchProduct() {
+    debugger;
+    var filter = $("#searchInput").val();
+    getProducts(filter, null);
+
 }
