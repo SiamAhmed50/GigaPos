@@ -68,13 +68,13 @@
                     <span asp-validation-for="Product.SubUnitId" class="text-danger"></span>
                 </div>
                 <div class="mb-3  col-md-12 openningStockUnit">
-                    <label>Openning Stock</label>
-                    <input asp-for="Product.OpenningStockUnit" type="text" class="form-control" />
+                    <label>Openning Stock Unit</label>
+                    <input asp-for="Product.OpenningStockUnit" type="number" value="0" class="form-control" />
                     <span asp-validation-for="Product.OpenningStockUnit" class="text-danger"></span>
                 </div>
                  <div class="mb-3  col-md-6 d-none openningStockSubUnit">
-                    
-                    <input asp-for="Product.OpenningStockSubUnit" class="form-control" />
+                     <label>Openning Stock Sub Unit</label>
+                    <input asp-for="Product.OpenningStockSubUnit"  type="number" value="0" class="form-control" />
                     <span asp-validation-for="Product.OpenningStockSubUnit" class="text-danger"></span>
                 </div>
                
