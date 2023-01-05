@@ -224,10 +224,16 @@ namespace POS.UI.Controllers
 
         {
 
-            var itemVm = _unitOfWork.Product.GetFirstOrDefault(x=>x.Id==id);
-            itemVm.Category = _unitOfWork.Category.GetFirstOrDefault(f => f.Id == id);
-            itemVm.Brand = _unitOfWork.Brand.GetFirstOrDefault(f => f.Id == id);
-             return Json(new { data = itemVm });
+            var product = _unitOfWork.Product.GetFirstOrDefault(x=>x.Id==id);
+            product.Category = _unitOfWork.Category.GetFirstOrDefault(f => f.Id == product.CategoryId);
+            product.Brand = _unitOfWork.Brand.GetFirstOrDefault(f => f.Id == product.BrandId);
+            product.Unit = _unitOfWork.Unit.GetFirstOrDefault(f => f.Id == product.UnitId);
+
+            var productVm = new ProductVM();
+            productVm.Product = product;
+
+            productVm.SubUnit = _unitOfWork.Unit.GetFirstOrDefault(f => f.Id == product.SubUnitId);
+             return Json(new { data = productVm });
 
         }
 

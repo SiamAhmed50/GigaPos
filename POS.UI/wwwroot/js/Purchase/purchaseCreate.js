@@ -4,6 +4,8 @@
 var counter = 0;
 var index = 0;
 var productPrice = 0;
+var product = null;
+var productVm = null;
 $("#ProductList").on("change", function () {
    
     var productId = $("#ProductList option:selected").val();
@@ -18,18 +20,40 @@ $("#ProductList").on("change", function () {
 
         success: function (data) {
             debugger;
-            product = data.data;
+            productVm = data.data;
+            product = data.data.product;
             productPrice = product.salePrice;
 
         } 
     });
+    debugger;
+    var singleUnit = '<td class="pr-3"> <div class="form-row"><label class="ml-4 mr-2">###unitname###:</label>' +
+        '<input type = "number" value = "0" class="form-control col main_qty" name ="" data-relatedby="' + product.unit.relatedBy + '" onkeyup = "CalculateSubTotal()"></div> </td>';
+
+    var doubleUnit = '<td class="pr-3"> <div class="form-row"><label class="ml-4 mr-2">###unitname###:</label>' +
+        '<input type = "number" value = "0" class="form-control col main_qty" name ="" data-relatedby="' + product.unit.relatedBy + '" onkeyup = "CalculateSubTotal()">' +
+        '<label class="ml-4 mr-2">###subunitname###:</label><input type = "number" value = "0" class="form-control col sub_qty" name = "" onkeyup = "CalculateSubTotal()"> </div> </td>';
+    if (productVm.subUnit != null) {
+        doubleUnit = doubleUnit.replace("###unitname###", product.unit.name).replace("###subunitname###", productVm.subUnit.name);
+    }
+    else {
+        singleUnit = singleUnit.replace("###unitname###", product.unit.name);
+    }
+
     var productRow = '<tr><td>' + counter + '</td>'+
         '<td> <span class="productName">' + productName + '</span> <input type = "hidden" value = "' + productId + '" class="ProductId" name = "Purchase.PurchaseItems[' + index + '].ProductId" class="" ></td>' +
         '<td style="width:150px"><input type="text" value="' + productPrice+'" class="form-control rate" name="Purchase.PurchaseItems[' + index + '].Price" onkeyup="CalculateSubTotal()"></td>' +
-        '<td class="pr-3"> <div class="form-row"><label class="ml-4 mr-2">pc:</label>'+
-        '<input type = "number" value = "0" class="form-control col main_qty" name = "Purchase.PurchaseItems[' + index + '].Quantity" onkeyup = "CalculateSubTotal()"></div> </td>' +
+        '###quantityinput### <input type="hidden" class="quantity" name="Purchase.PurchaseItems[' + index + '].Quantity" />' +
         '<td> <strong><span class="sub_total">0</span> Tk</strong> <input type="hidden" name="Purchase.PurchaseItems[' + index + '].SubTotal" class="subtotal_input" value="0"></td>' +
         '<td> <a onclick="RemoveProduct(this)" class="removeProduct">  <i class="fa fa-trash"></i> </a> </td>  </tr> ';
+
+    if (productVm.subUnit != null) {
+        productRow = productRow.replace("###quantityinput###", doubleUnit);
+    }
+    else {
+        productRow = productRow.replace("###quantityinput###", singleUnit);
+    }
+
 
     $("#purchaseProduct tbody").append(productRow);
     index++;
@@ -43,9 +67,27 @@ function CalculateSubTotal() {
     var rows = $("#purchaseProduct tbody tr");
     rows.each(function () {
         debugger;
-        var price = $(this).find(".rate").val();
-        var qty = $(this).find(".main_qty").val();
-        $(this).find(".subtotal_input").val(price * qty);
+        var main_qty = 0;
+        var sub_qty = 0;
+        var tot_qty = 0;
+        var relatedBy = 0;
+        var price = parseFloat($(this).find(".rate").val()).toFixed(2);
+        main_qty = parseInt($(this).find(".main_qty").val());
+        relatedBy = parseInt($(this).find(".main_qty").attr("data-relatedby"));
+        if ($(this).find(".sub_qty").length > 0) {
+            sub_qty = parseInt($(this).find(".sub_qty").val());
+           
+            $(this).find(".subtotal_input").val(parseFloat((price * main_qty) + ((price / relatedBy) * sub_qty)).toFixed(2));
+            tot_qty = (main_qty * relatedBy) + sub_qty;
+        }
+        else {
+
+            $(this).find(".subtotal_input").val(price * main_qty);
+              tot_qty = (main_qty * relatedBy) + sub_qty;
+        }
+      
+        $(this).find(".quantity").val(tot_qty);
+       
         $(this).find(".sub_total").html($(this).find(".subtotal_input").val());
 
     });
