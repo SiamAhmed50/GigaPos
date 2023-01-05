@@ -44,7 +44,7 @@ namespace POS.UI.Controllers
 
                 CustomerList = customerList.Select(i => new SelectListItem
                 {
-                    Text = i.Name,
+                    Text = i.Name+" - "+i.Phone.ToString(),
                     Value = i.Id.ToString()
                 }),
                 CategoryList = categoryList.Select(i => new SelectListItem
