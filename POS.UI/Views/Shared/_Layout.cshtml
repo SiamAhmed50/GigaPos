@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - POS.UI</title>
-
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
     <!-- Custom CSS -->
     <!-- Google Font: Source Sans Pro -->
     @*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">*@
@@ -631,9 +631,8 @@
 
   <!-- All Jquery -->
     <!-- jQuery -->
-    <script src="~/plugins/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)
@@ -687,21 +686,20 @@
     <script src="~/dist/js/pages/dashboard.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" integrity="sha512-CryKbMe7sjSCDPl18jtJI5DR5jtkUWxPXWaLCst6QjH8wxDexfRJic2WRmRXmstr2Y8SxDDWuBO6CQC6IE4KTA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script>
- 
-        $(document).ready(function(){
-            $( '.basic-select2' ).select2( {
-                theme: 'bootstrap-5'
-            });
 
-            $(".custom-datepicker").val(new Date().toDateInputValue());
-;               
-        
+            <script>
+        $(function () {
+            $('#getCurrentDate').datepicker({
+                dateFormat: 'dd-mm-yy',
+                changeMonth: true,
+                changeYear: true
+            }).datepicker('setDate', '0');
         });
-
-
-
     </script>
+
+
+
+   
 
 
     @await RenderSectionAsync("Scripts", required: false)

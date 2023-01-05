@@ -9,14 +9,19 @@
 		@*<div asp-validation-summary="All"></div>*@
 		<div class="mb-3">
 			<label asp-for="Damage.ProductId"></label>
-			<select asp-for="Damage.ProductId" class="form-control" asp-items="ViewBag.ProductList" >
+			<select asp-for="Damage.ProductId" class="form-control basic-select2" asp-items="@Model.ProductList" id="ProductList">
 				<option value="">Select Product</option>
 			</select>
 			<span asp-validation-for="Damage.ProductId" class="text-danger"></span>
 		</div>
-		<div class="mb-3">
-			<label asp-for="Damage.CreatedDate"></label>
-			<input asp-for="Damage.CreatedDate" type="date" data-provide="datepicker" data-date-today-highlight="true" data-date-format="yyyy-mm-dd" class="form-control" name="date" >
+			<div class="mb-3 damage-qty">
+			<label >pc:</label>
+			<input class="form-control" type="number" id="qty" />
+			
+		</div>
+		<div class="mb-3 " >
+			<label >Date </label>
+			<input  type="text" class="form-control" id="getCurrentDate" >
 			
 			<span asp-validation-for="Damage.CreatedDate" class="text-danger"></span>
 		</div>
@@ -36,4 +41,5 @@
 	@{
 		<partial name="_ValidationScriptsPartial" />
 	}
+	<script src="~/js/Damage/damage.js"> </script>
 }

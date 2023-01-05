@@ -1,65 +1,76 @@
-﻿
+﻿@using POS.Models.EntityModel
+
+@model IEnumerable<Damage>
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
+<div class=" py-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-dark">Damage List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-controller="Damages" asp-action="Upsert" class="btn-info btn btn-sm">
+                <i class="fa-solid fa-square-plus"></i> &nbsp; Create New Damage
+            </a>
+        </div>
+    </div>
+</div>
 <div class="row">
-    <div class="col-12">
-
-
+    <div class="col-md-12">
         <div class="card card-body mb-2">
             <form action="">
                 <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <select class="form-control" placeholder="Name" asp-items=" ViewBag.ProductList">
+                            <option value="">Select Product</option>
+                        </select>
+                    </div>
 
-                    <div class="form-group col-md-4">
-                        <div class="btn-group bootstrap-select form-control">
-                            <button type="button" class="btn dropdown-toggle bs-placeholder btn-light" data-toggle="dropdown" role="button" data-id="" title="Select Product"><span class="filter-option pull-left">Select Product</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search"></div><div class="dropdown-menu inner" role="listbox" aria-expanded="false"><a class="dropdown-item selected" data-original-index="0"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Select Product</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="1"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Mobile Phone</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="2"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">laptop Comouter</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="3"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Desktop Computer</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="4"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">T Shirt</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="5"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Ladis Shirt</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="6"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Freez</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="7"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Air Condition</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="8"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Door Export</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="9"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Blajer For Men</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="10"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Dril Machine</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="11"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Gaming Laptop</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="12"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Pen</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="13"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Locks</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="14"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Keys</span><span class=" ti-check check-mark"></span></span></a><a class="dropdown-item" data-original-index="15"><span tabindex="0" class="dropdown-item-inner " data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">MRF M77 1000R20</span><span class=" ti-check check-mark"></span></span></a></div></div><select name="product" class="form-control" data-provide="selectpicker" data-live-search="true" data-size="10" tabindex="-98">
-                                <option value="">Select Product</option>
-                                <option value="1">Mobile Phone</option>
-                                <option value="2">laptop Comouter</option>
-                                <option value="3">Desktop Computer</option>
-                                <option value="4">T Shirt</option>
-                                <option value="5">Ladis Shirt</option>
-                                <option value="6">Freez</option>
-                                <option value="7">Air Condition</option>
-                                <option value="8">Door Export</option>
-                                <option value="9">Blajer For Men</option>
-                                <option value="10">Dril Machine</option>
-                                <option value="11">Gaming Laptop</option>
-                                <option value="12">Pen</option>
-                                <option value="13">Locks</option>
-                                <option value="14">Keys</option>
-                                <option value="15">MRF M77 1000R20</option>
-                            </select>
-                        </div>
+                    <div class="form-group col-md-3">
+                        <input type="text" class="form-control" name="number"  value="">
                     </div>
-                    <div class="form-group col-md-4">
-                        <input type="text" name="id" value="" class="form-control">
-                    </div>
+
+
+
+
                 </div>
                 <div class="form-row mt-2">
                     <div class="form-group float-right">
-                        <button class="btn btn-primary" type="submit">
+                        <button class="btn btn-success btn-sm" type="submit">
                             <i class="fa fa-sliders"></i>
                             Filter
                         </button>
-                        <a href="https://pos.softghor.com/back/pos" class="btn btn-info">Reset</a>
+                        <a href="https://pos.softghor.com/back/product" class="btn btn-info btn-sm">Reset</a>
                     </div>
                 </div>
             </form>
         </div>
-
-        <div class="card">
-            <h4 class="card-title"><strong>Damages</strong></h4>
-
-            <div class="card-body card-body-soft">
-                <div class="alert alert-danger" role="alert">
-                    <strong>You have no damages</strong>
-                </div>
-            </div>
-        </div>
     </div>
-
 </div>
+<br>
+<table class="table table-bordered table-striped table-sm" style="width:100%" id="DamageTbl">
+    <thead class="bg-info">
+        <tr>
+
+            <th>Id</th>
+            <th>Date</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Note</th>
+            <th>Action</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+
+
+</table>
+
+@section Scripts{
+    <script src="~/js/Damage/damage.js"> </script>
+
+}
