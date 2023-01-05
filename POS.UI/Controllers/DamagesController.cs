@@ -25,13 +25,16 @@ namespace POS.UI.Controllers
         {
 			List<Product> productList = new List<Product>();
 			productList = _unitOfWork.Product.GetAll().ToList();
-
+            foreach(Product product in productList)
+            {
+                product.Unit = _unitOfWork.Unit.GetFirstOrDefault(f => f.Id == product.UnitId);
+            }
 			DamageVM damageVM = new()
             {
                 Damage = new(),
 				ProductList = productList.Select(i => new SelectListItem
 				{
-					Text = i.Name + " - "+"Stock: " + i.Stock.ToString()+"pc",
+					Text = i.Name + " - "+"Stock: " + i.Stock.ToString() + i.Unit.Name,
 					Value = i.Id.ToString()
 				}),
 			};
