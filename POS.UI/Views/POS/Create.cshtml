@@ -6,6 +6,8 @@
 .product {
     border: 1px solid #DDD;
     cursor: pointer;
+    min-height: 200px;
+    max-height: 200px;
 }
 .img-thumbnail {
     padding: 0.25rem;
@@ -104,17 +106,11 @@
             </div>
             <div class="card-body category">
                 <ul class="list-group">
-                                            <li class="list-group-item px-0 py-1"><a href="#" class="btn btn-primary btn-block" onclick="getProductsByCat(5)">Document</a>
-                        </li>
-                                            <li class="list-group-item px-0 py-1"><a href="#" class="btn btn-primary btn-block" onclick="getProductsByCat(1)">Electronics</a>
-                        </li>
-                                            <li class="list-group-item px-0 py-1"><a href="#" class="btn btn-primary btn-block" onclick="getProductsByCat(3)">Fashion</a>
-                        </li>
-                                            <li class="list-group-item px-0 py-1"><a href="#" class="btn btn-primary btn-block" onclick="getProductsByCat(4)">Hardware</a>
-                        </li>
-                                            <li class="list-group-item px-0 py-1"><a href="#" class="btn btn-primary btn-block" onclick="getProductsByCat(2)">House</a>
-                        </li>
-                                    </ul>
+                                    @foreach(var category in Model.CategoryList)
+                                    {
+                                         <li class="list-group-item px-0 py-1"><a href="#" class="btn btn-primary btn-block" onclick="getProducts(null,@category.Value)">@category.Text</a>  </li> 
+                                    }                           
+                                </ul>
             </div>
         </div>
         <div class="col-md-9">
@@ -124,178 +120,24 @@
             <div class="card-body">
                 
                 
-                <form action="https://pos.softghor.com/back/pos-products" class="product-filter">
+                
                     <div class="row">
                         <div class="col-md-6" style="padding-left:4px;">
-                            <input type="text" name="code" class="form-control code">
+                            <input type="text" name="" id="searchInput" class="form-control">
                         </div>
                         <div class="col-md-6">
-                            <input type="submit" class="btn btn-success" value="Search">
-                            <a href="https://pos.softghor.com/back/pos/create" class="btn btn-danger">Reset</a>
+                            <input type="button" onclick="searchProduct()" class="btn btn-success" value="Search">
+                            <a href="javascript:clearFilter()" class="btn btn-danger">Reset</a>
                         </div>
                     </div>
-                </form>
-                
+           
                 
                 <div class="row mt-4 productList">
                     <input type='hidden' id='current_page' />
                     <input type='hidden' id='show_per_page' />
                      <div id="pagingBox">
-                          <div class="col-sm-4 col-md-4">
-                            <div class=" product text-center m-2 product">
-                            <img src="~/img/ProductImages/4c42a969-41da-469c-9fb5-ee8115017781logo.PNG" class="align-self-start img-thumbnail" alt="Air Condition" style="width:80px" data-pagespeed-url-hash="31082695" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                            <br>
-                            <span>Air Condition - 000007</span>
-                            <br>
-                            <small class="font-weight-bold">96000.00</small> Tk
-                            <br>
-                            <small class="stock">Stock : 98 pc</small>
-                            </div>
-                        </div>
-                         <div class="col-sm-4 col-md-4">
-                            <div class=" product text-center m-2 product">
-                            <img src="~/img/ProductImages/4c42a969-41da-469c-9fb5-ee8115017781logo.PNG" class="align-self-start img-thumbnail" alt="Air Condition" style="width:80px" data-pagespeed-url-hash="31082695" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                            <br>
-                            <span>Air Condition - 000007</span>
-                            <br>
-                            <small class="font-weight-bold">96000.00</small> Tk
-                            <br>
-                            <small class="stock">Stock : 98 pc</small>
-                            </div>
-                        </div>
-                         <div class="col-sm-4 col-md-4">
-                            <div class=" product text-center m-2 product">
-                            <img src="~/img/ProductImages/4c42a969-41da-469c-9fb5-ee8115017781logo.PNG" class="align-self-start img-thumbnail" alt="Air Condition" style="width:80px" data-pagespeed-url-hash="31082695" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                            <br>
-                            <span>Air Condition - 000007</span>
-                            <br>
-                            <small class="font-weight-bold">96000.00</small> Tk
-                            <br>
-                            <small class="stock">Stock : 98 pc</small>
-                            </div>
-                        </div>
-                         <div class="col-sm-4 col-md-4">
-                            <div class=" product text-center m-2 product">
-                            <img src="~/img/ProductImages/4c42a969-41da-469c-9fb5-ee8115017781logo.PNG" class="align-self-start img-thumbnail" alt="Air Condition" style="width:80px" data-pagespeed-url-hash="31082695" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                            <br>
-                            <span>Air Condition - 000007</span>
-                            <br>
-                            <small class="font-weight-bold">96000.00</small> Tk
-                            <br>
-                            <small class="stock">Stock : 98 pc</small>
-                            </div>
-                        </div>
-                         <div class="col-sm-4 col-md-4">
-                            <div class=" product text-center m-2 product">
-                            <img src="~/img/ProductImages/4c42a969-41da-469c-9fb5-ee8115017781logo.PNG" class="align-self-start img-thumbnail" alt="Air Condition" style="width:80px" data-pagespeed-url-hash="31082695" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                            <br>
-                            <span>Air Condition - 000007</span>
-                            <br>
-                            <small class="font-weight-bold">96000.00</small> Tk
-                            <br>
-                            <small class="stock">Stock : 98 pc</small>
-                            </div>
-                        </div>
-                         <div class="col-sm-4 col-md-4">
-                            <div class=" product text-center m-2 product">
-                            <img src="~/img/ProductImages/4c42a969-41da-469c-9fb5-ee8115017781logo.PNG" class="align-self-start img-thumbnail" alt="Air Condition" style="width:80px" data-pagespeed-url-hash="31082695" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                            <br>
-                            <span>Air Condition - 000007</span>
-                            <br>
-                            <small class="font-weight-bold">96000.00</small> Tk
-                            <br>
-                            <small class="stock">Stock : 98 pc</small>
-                            </div>
-                        </div>
-                         <div class="col-sm-4 col-md-4">
-                            <div class=" product text-center m-2 product">
-                            <img src="~/img/ProductImages/4c42a969-41da-469c-9fb5-ee8115017781logo.PNG" class="align-self-start img-thumbnail" alt="Air Condition" style="width:80px" data-pagespeed-url-hash="31082695" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                            <br>
-                            <span>Air Condition - 000007</span>
-                            <br>
-                            <small class="font-weight-bold">96000.00</small> Tk
-                            <br>
-                            <small class="stock">Stock : 98 pc</small>
-                            </div>
-                        </div>
-                         <div class="col-sm-4 col-md-4">
-                            <div class=" product text-center m-2 product">
-                            <img src="~/img/ProductImages/4c42a969-41da-469c-9fb5-ee8115017781logo.PNG" class="align-self-start img-thumbnail" alt="Air Condition" style="width:80px" data-pagespeed-url-hash="31082695" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                            <br>
-                            <span>Air Condition - 000007</span>
-                            <br>
-                            <small class="font-weight-bold">96000.00</small> Tk
-                            <br>
-                            <small class="stock">Stock : 98 pc</small>
-                            </div>
-                        </div>
-                         <div class="col-sm-4 col-md-4">
-                            <div class=" product text-center m-2 product">
-                            <img src="~/img/ProductImages/4c42a969-41da-469c-9fb5-ee8115017781logo.PNG" class="align-self-start img-thumbnail" alt="Air Condition" style="width:80px" data-pagespeed-url-hash="31082695" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                            <br>
-                            <span>Air Condition - 000007</span>
-                            <br>
-                            <small class="font-weight-bold">96000.00</small> Tk
-                            <br>
-                            <small class="stock">Stock : 98 pc</small>
-                            </div>
-                        </div>
-                         <div class="col-sm-4 col-md-4">
-                            <div class=" product text-center m-2 product">
-                            <img src="~/img/ProductImages/4c42a969-41da-469c-9fb5-ee8115017781logo.PNG" class="align-self-start img-thumbnail" alt="Air Condition" style="width:80px" data-pagespeed-url-hash="31082695" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                            <br>
-                            <span>Air Condition - 000007</span>
-                            <br>
-                            <small class="font-weight-bold">96000.00</small> Tk
-                            <br>
-                            <small class="stock">Stock : 98 pc</small>
-                            </div>
-                        </div>
-                         <div class="col-sm-4 col-md-4">
-                            <div class=" product text-center m-2 product">
-                            <img src="~/img/ProductImages/4c42a969-41da-469c-9fb5-ee8115017781logo.PNG" class="align-self-start img-thumbnail" alt="Air Condition" style="width:80px" data-pagespeed-url-hash="31082695" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                            <br>
-                            <span>Air Condition - 000007</span>
-                            <br>
-                            <small class="font-weight-bold">96000.00</small> Tk
-                            <br>
-                            <small class="stock">Stock : 98 pc</small>
-                            </div>
-                        </div>
-                         <div class="col-sm-4 col-md-4">
-                            <div class=" product text-center m-2 product">
-                            <img src="~/img/ProductImages/4c42a969-41da-469c-9fb5-ee8115017781logo.PNG" class="align-self-start img-thumbnail" alt="Air Condition" style="width:80px" data-pagespeed-url-hash="31082695" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                            <br>
-                            <span>Air Condition - 000007</span>
-                            <br>
-                            <small class="font-weight-bold">96000.00</small> Tk
-                            <br>
-                            <small class="stock">Stock : 98 pc</small>
-                            </div>
-                        </div>
-                         <div class="col-sm-4 col-md-4">
-                            <div class=" product text-center m-2 product">
-                            <img src="~/img/ProductImages/4c42a969-41da-469c-9fb5-ee8115017781logo.PNG" class="align-self-start img-thumbnail" alt="Air Condition" style="width:80px" data-pagespeed-url-hash="31082695" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                            <br>
-                            <span>Air Condition - 000007</span>
-                            <br>
-                            <small class="font-weight-bold">96000.00</small> Tk
-                            <br>
-                            <small class="stock">Stock : 98 pc</small>
-                            </div>
-                        </div>
-                         <div class="col-sm-4 col-md-4">
-                            <div class=" product text-center m-2 product">
-                            <img src="~/img/ProductImages/4c42a969-41da-469c-9fb5-ee8115017781logo.PNG" class="align-self-start img-thumbnail" alt="Air Condition" style="width:80px" data-pagespeed-url-hash="31082695" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                            <br>
-                            <span>Air Condition - 000007</span>
-                            <br>
-                            <small class="font-weight-bold">96000.00</small> Tk
-                            <br>
-                            <small class="stock">Stock : 98 pc</small>
-                            </div>
-                        </div>
-                     
+                         
+                      
                      
                             
                         

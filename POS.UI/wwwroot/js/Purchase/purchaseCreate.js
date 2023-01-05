@@ -115,3 +115,37 @@ $("#pay_amount").keyup(function () {
     $("#due_input").val(due);
 
 })
+
+
+
+function SaveSupplier() {
+
+    debugger;
+    let name = $("#supplierName").val();
+    let email = $("#supplierEmail").val();
+    let phone = $("#supplierPhone").val();
+    let address = $("#supplierAddress").val();
+    let openeingReceivable = $("#openeingReceivable").val();
+    let openeingPayable = $("#openeingPayable").val();
+
+    if ($("#supplierForm").valid()) {
+
+        var formData = $("#supplierForm").serialize();
+        $.ajax({
+            url: "/Suppliers/Upsert",
+            type: "POST",
+            data: formData,
+            success: function (response) {
+                debugger
+                location.reload(true);
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+        });
+
+
+
+    }
+
+}
