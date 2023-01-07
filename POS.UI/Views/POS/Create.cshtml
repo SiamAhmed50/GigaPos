@@ -70,7 +70,7 @@
                                         <thead class="bg-info">
                                             <tr>
                                                 <th>Name</th>
-                                                <th style="width:120px;">Quantity</th>
+                                                <th >Quantity</th>
                                                 <th>Price</th>
                                                 <th>Sub T</th>
                                                 <th>
@@ -97,7 +97,7 @@
                                     </table>
 
                                     <div class="form-gorup text-center">
-                                        <button type="button" id="payment-btn" class="btn btn-info">
+                                        <button type="button" id="payment-btn" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#payment-modal">
                                             <i class="fa fa-money"></i>
                                             Payment
                                         </button>
@@ -265,6 +265,7 @@
                                             <input type='hidden' id='current_page' />
                                             <input type='hidden' id='show_per_page' />
                                             <div id="pagingBox">
+
                                             </div>
                                         </div>
                                         <nav class="my-3">

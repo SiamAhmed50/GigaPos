@@ -34,12 +34,12 @@ $("#ProductList").on("change", function () {
         }
     });
     debugger;
-    var singleUnit = '<td class="pr-3"> <div class="form-row"><label class="ml-4 mr-2">###unitname###:</label>' +
-        '<input type = "number" value = "0" class="form-control col main_qty" name ="" data-relatedby="' + product.unit.relatedBy + '" onkeyup = "CalculateSubTotal()"></div> </td>';
+    var singleUnit = '<td class="pr-3"> <div class="form-row"><label class="ml-2 mr-2">###unitname###:</label>' +
+        '<input type = "text" value = "0" class="form-control col main_qty" name ="" data-relatedby="' + product.unit.relatedBy + '" onkeyup = "CalculateSubTotal()"></div> </td>';
 
-    var doubleUnit = '<td class="pr-3"> <div class="form-row"><label class="ml-4 mr-2">###unitname###:</label>' +
-        '<input type = "number" value = "0" class="form-control col main_qty" name ="" data-relatedby="' + product.unit.relatedBy + '" onkeyup = "CalculateSubTotal()">' +
-        '<label class="ml-4 mr-2">###subunitname###:</label><input type = "number" value = "0" class="form-control col sub_qty" name = "" onkeyup = "CalculateSubTotal()"> </div> </td>';
+    var doubleUnit = '<td class="pr-3"> <div class="form-row"><label class="ml-2 mr-2">###unitname###:</label>' +
+        '<input type = "text" value = "0" class="form-control col main_qty" name ="" data-relatedby="' + product.unit.relatedBy + '" onkeyup = "CalculateSubTotal()">' +
+        '<label class="ml-2 mr-2">###subunitname###:</label><input type = "text" value = "0" class="form-control col sub_qty" name = "" onkeyup = "CalculateSubTotal()"> </div> </td>';
     if (productVm.subUnit != null) {
         doubleUnit = doubleUnit.replace("###unitname###", product.unit.name).replace("###subunitname###", productVm.subUnit.name);
     }
@@ -50,9 +50,9 @@ $("#ProductList").on("change", function () {
     var productRow = 
         '<tr> <td> <span class="productName">' + productName + '</span> <input type = "hidden" value = "' + productId + '" class="ProductId" name = "Purchase.PurchaseItems[' + index + '].ProductId" class="" ></td>' +
         '###quantityinput### <input type="hidden" class="quantity" name="Purchase.PurchaseItems[' + index + '].Quantity" />' +
-        '<td style="width:150px"><input type="text" value="' + productPrice + '" class="form-control rate" name="Purchase.PurchaseItems[' + index + '].Price" onkeyup="CalculateSubTotal()"></td>' +
+        '<td ><input type="text" value="' + productPrice + '" class="form-control rate" name="Purchase.PurchaseItems[' + index + '].Price" onkeyup="CalculateSubTotal()"></td>' +
        
-        '<td> <strong><span class="sub_total">0</span> Tk</strong> <input type="hidden" name="Purchase.PurchaseItems[' + index + '].SubTotal" class="subtotal_input" value="0"></td>' +
+        '<td width="120"> <strong><span class="sub_total">0</span> Tk</strong> <input type="hidden" name="Purchase.PurchaseItems[' + index + '].SubTotal" class="subtotal_input" value="0"></td>' +
         '<td> <a onclick="RemoveProduct(this)" class="removeProduct">  <i class="fa fa-trash"></i> </a> </td>  </tr> ';
 
     if (productVm.subUnit != null) {
@@ -151,7 +151,7 @@ function RemoveProduct(elem) {
 
 
 $(document).ready(function () {
-    debugger;
+    
 
     getProducts();
     //Pagination JS
@@ -238,7 +238,7 @@ function go_to_page(page_num) {
 }
 
 function getProducts(searchFilter, categoryId) {
-    debugger;
+   
 
   
 
@@ -251,11 +251,11 @@ function getProducts(searchFilter, categoryId) {
         async: false,
 
         success: function (data) {
-            debugger;
+           
             products = data.data;
             $("#pagingBox").html("");
             for (var i = 0; i < products.length; i++) {
-                var productDiv = '<div class="col-sm-4 col-md-4"><div class=" product text-center m-2 product" ><img src="###imgurl###" class="align-self-start img-thumbnail" alt="###productnamealt###" style="width:80px" data-pagespeed-url-hash="31082695"><br><span>###productname### - ###productcode###</span> <br> <small class="font-weight-bold">###productprice###</small> Tk<br><small class="stock">Stock : ###stock### pc</small> </div></div>';
+                var productDiv = '<div class="col-sm-4 col-md-4 custom-display" style="display: inline-block;" ><div class=" product text-center m-2 product" ><img src="###imgurl###" class="align-self-start img-thumbnail" alt="###productnamealt###" style="width:80px" data-pagespeed-url-hash="31082695"><br><span>###productname### - ###productcode###</span> <br> <small class="font-weight-bold">###productprice###</small> Tk<br><small class="stock">Stock : ###stock### pc</small> </div></div>';
 
                 productDiv = productDiv.replace("###imgurl###", products[i].imageUrl).replace("###productnamealt###", products[i].name).replace("###productname###", products[i].name).replace("###productcode###", products[i].code).replace("###productprice###", products[i].salePrice).replace("###stock###", products[i].stock);
                 $("#pagingBox").append(productDiv);
