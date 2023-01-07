@@ -1,0 +1,188 @@
+﻿@model PurchaseInvoiceVM
+<style>
+    .main-content {
+    padding: 30px 30px 0;
+    -webkit-box-flex: 1;
+    flex: 1 0 auto;
+}
+.row.justify-content-center {
+    width: 50%;
+    margin: auto;
+}
+.logo-area {
+    float: left;
+    width: 20%;
+}
+.logo-area img {
+    width: 100%;
+}
+.invoice-header
+{
+    overflow: hidden;
+}
+.address-area{
+    margin-bottom: 1rem;
+    font-style: normal;
+    line-height: inherit;
+    float: right;
+    width: 50%;
+}
+.bill-date {
+    width: 100%;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    padding: 0 15px;
+}
+.bill-no, .date, .name, .mobile-no, .address, th, td, address, h4 {
+    color: #000;
+}
+.bill-no {
+    width: 50%;
+    float: left;
+}
+.date {
+    width: 50%;
+    float: left;
+}
+.name, .address, .mobile-no, .cus_info {
+    width: 100%;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 0 15px;
+}
+
+b, strong {
+   font-weight: 600;
+}
+.custom-background{ background-color: #e4e7ea;}
+</style> 
+
+<div class="row">
+                <div class="col-md-12">
+                    <div class="row align-items-center">
+                        <div class="col-md-7 card card-body">
+                            <div id="print-area">
+                                <div class="invoice-header">
+                                    <div class="logo-area">
+                                        <img src="~/img/logo.png">
+                                    </div>
+                                    <div class="address-area">
+                                        <address>
+                                            Address : <strong>@Model.Address</strong>
+                                            <br>
+                                            Phone : <strong>@Model.Phone</strong>
+                                            <br>
+                                            Email : <strong>@Model.Email</strong>
+
+                                        </address>
+                                    </div>
+                                    
+
+                                </div>
+
+                                <div class="bill-date">
+                                    <div class="bill-no">
+                                        Invoice No: @Model.InvoiceId
+                                    </div>
+                                    <div class="date">
+                                        Date: <strong>@Model.Date</strong>
+                                    </div>
+                                </div>
+                                <div class="name">
+                                    Supplier Name :
+                                    <strong>@Model.SupplierName</strong>
+                                </div>
+                                <div class="address">
+                                    Address : <strong>@Model.SupplierName</strong>
+                                </div>
+                                <div class="mobile-no">
+                                    Mobile : <strong>@Model.Phone</strong>
+                                </div>
+
+
+
+                                <table class="table table-bordered table-plist my-3 order-details">
+                                    <tbody>
+                                        <tr class="custom-background">
+                                            <th>#</th>
+                                            <th>Details</th>
+                                            <th>Qty</th>
+                                            <th>Price</th>
+                                            <th>Net.A</th>
+                                        </tr>
+                                        @{var cntr = 1;}
+                                        @foreach(var product in Model.PurchaseItems)
+                                        {
+                                            <tr>
+                                            <td>@cntr</td>
+                                            <td>@product.ProductName | @product.ProductCode </td>
+                                            <td>@product.MainUnitQuantity @product.UnitName @product.SubUnitName @product.SubUnitQuantity </td>
+                                            <td>@product.Price</td>
+                                            <td>@product.SubTotal</td>
+                                </tr>
+                                cntr++;
+                            }
+                            
+
+                                        <tr>
+                                            <td colspan="4" class="text-right">Grand Total : </td>
+                                            <td>
+                                                <strong>@Model.GrandTotal </strong>Tk
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="4" class="text-right">Paid : </td>
+                                            <td>
+                                                <strong>@Model.Paid </strong>Tk
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="4" class="text-right"> Due : </td>
+                                            <td>
+                                                <strong>
+                                                    @Model.Due
+                                                </strong>Tk
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                            <button class="btncustom-background btn-block" onclick="printinvoice('print-area')">
+                                <i class="fa fa-print"></i>
+                                Print
+                            </button>
+                            <div class="row mt-4">
+                                <div class="col-6">
+                                    <a href="/Purchase/Create" class="btn btn-info btn-block">
+                                        <i class="fa fa-reply"></i>
+                                        New Purchase
+                                    </a>
+                                </div>
+
+                                <div class="col-6 text-end">
+                                    <a href="/Purchase/Index" class="btn btn-info btn-block">
+                                        <i class="fa fa-reply"></i>
+                                        Purchase List
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+@section Scripts
+{ 
+    <script src="~/js/Purchase/purchaseInvoice.js"></script>
+}

@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using POS.DAL.Repository.IRpository;
 using POS.Models.AppVM;
-using POS.Models.EntityModel;
-using Microsoft.AspNetCore.Mvc;
+using POS.Models.EntityModel; 
 using Microsoft.AspNetCore.Mvc.Rendering;
 namespace POS.UI.Controllers
 {
@@ -40,8 +39,7 @@ namespace POS.UI.Controllers
             }
 
 
-
-            return View();
+ 
         }
 
         [HttpPost]

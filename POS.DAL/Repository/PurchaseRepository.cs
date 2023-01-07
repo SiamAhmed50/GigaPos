@@ -1,5 +1,6 @@
 ﻿using POS.DAL.Data;
 using POS.DAL.Repository.IRpository;
+using POS.Models;
 using POS.Models.EntityModel;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,10 @@ namespace POS.DAL.Repository
             _db = db;
         }
 
+        public List<PurchaseItem> GetPurchaseItems(int PurchaseId)
+        {
+           return _db.PurchaseItems.AsQueryable().Where(w => w.PurchaseId == PurchaseId).ToList();
+        }
 
         public void Update(Purchase obj)
         {
